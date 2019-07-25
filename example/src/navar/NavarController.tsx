@@ -33,6 +33,7 @@ const defaultState: IState = {
 };
 
 const listenCache = new Set();
+let isLock = false;
 
 export const navarCtrl: IManager = {
   animeTime: 300,
@@ -40,6 +41,10 @@ export const navarCtrl: IManager = {
   state: { ...defaultState },
   ctx: React.createContext({ ...defaultState }),
   pop: () => {
+    if (isLock) {
+      return;
+    }
+    isLock = true;
     const lastHis = navarCtrl.state.historys[navarCtrl.state.historys.length - 1];
     navarCtrl.state.historys[navarCtrl.state.historys.length - 1] = {
       ...lastHis,
@@ -55,6 +60,7 @@ export const navarCtrl: IManager = {
     });
 
     setTimeout(() => {
+      isLock = false;
       navarCtrl.state.historys.pop();
       navarCtrl.setState({
         historys: [...navarCtrl.state.historys],
