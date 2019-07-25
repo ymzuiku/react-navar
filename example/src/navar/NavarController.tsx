@@ -21,6 +21,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
 
   const [state, setState] = React.useState<IState>(navarManager.state);
   const { current } = React.useRef({
+    startTime: 0,
     leftMoveToRight: false,
     startX: 0,
     move: 0,
@@ -42,6 +43,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       if (startXPx < 150) {
         current.leftMoveToRight = true;
         current.startX = startX;
+        current.startTime = Date.now();
       }
     };
     const touchMove = (event: any) => {
@@ -82,7 +84,10 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
         let isOut = false;
         if (endX - current.startX > 0.45) {
           isOut = true;
+        } else if (endX - current.startX > 0.15 && Date.now() - current.startTime < 250) {
+          isOut = true;
         }
+
         if (nowHis && nowHis.update) {
           nowHis.update({
             gesturing: false,
@@ -105,6 +110,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
           current.startX = 0;
           current.move = 0;
           current.endX = 0;
+          current.startTime = 0;
         }
         if (isOut) {
           setTimeout(() => {

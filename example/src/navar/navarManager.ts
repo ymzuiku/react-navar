@@ -14,7 +14,7 @@ interface IManager {
   setState(s: IState): any;
 }
 
-const ANIMETIME = 350;
+const ANIMETIME = 250;
 const SINKRATE = 0.25;
 
 const defaultState: IState = {
