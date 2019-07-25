@@ -4,6 +4,14 @@ export interface IPos {
   y: number;
 }
 
+export interface IPosAnime {
+  gesturing: boolean;
+  instant: boolean;
+  scale: number;
+  x: number;
+  y: number;
+}
+
 export interface IScroll {
   left: number;
   top: number;
@@ -30,11 +38,14 @@ export type ILifeName =
 export interface IHistory {
   beginTime: number;
   from: IPos;
+  index: number;
   name: ILifeName;
   now: IPos;
   option?: any;
   path: string;
   to: IPos;
+  transition: string;
+  update?(pos: IPosAnime): any;
 }
 
 export interface IState {

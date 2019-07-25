@@ -1,6 +1,9 @@
 import * as React from 'react';
 
+import * as device from './device';
 import { IState } from './navar.interface';
+import { navarManager } from './navarManager';
+import * as utils from './utils';
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children: any;
@@ -8,106 +11,123 @@ interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivEle
   // screens: { [key: string]: any };
 }
 
-interface IManager {
-  animeTime: number;
-  ctx: React.Context<IState>;
-  state: IState;
-  listen(fn: (state: IState) => any): any;
-  pop(): any;
-  push(path: string, option?: any): any;
-  replace(path: string, option?: any): any;
-  setState(s: IState): any;
-}
-
-const defaultState: IState = {
-  historys: [
-    {
-      beginTime: 0,
-      name: 'static',
-      from: { x: 0, y: 0, scale: 1 },
-      now: { x: 0, y: 0, scale: 1 },
-      to: { x: 0, y: 0, scale: 1 },
-      path: '',
-    },
-  ],
-};
-
-const listenCache = new Set();
-let isLock = false;
-
-export const navarCtrl: IManager = {
-  animeTime: 300,
-  setState: () => undefined,
-  state: { ...defaultState },
-  ctx: React.createContext({ ...defaultState }),
-  pop: () => {
-    if (isLock) {
-      return;
-    }
-    isLock = true;
-    const lastHis = navarCtrl.state.historys[navarCtrl.state.historys.length - 1];
-    navarCtrl.state.historys[navarCtrl.state.historys.length - 1] = {
-      ...lastHis,
-      beginTime: Date.now(),
-      name: 'pop',
-      from: { x: 0, y: 0, scale: 1 },
-      now: { x: 0, y: 0, scale: 1 },
-      to: { x: 1, y: 0, scale: 1 },
-    };
-
-    navarCtrl.setState({
-      historys: [...navarCtrl.state.historys],
-    });
-
-    setTimeout(() => {
-      isLock = false;
-      navarCtrl.state.historys.pop();
-      navarCtrl.setState({
-        historys: [...navarCtrl.state.historys],
-      });
-
-      listenCache.forEach((fn: any) => {
-        fn(navarCtrl.state);
-      });
-    }, navarCtrl.animeTime);
-  },
-  push: (path, option) => {
-    navarCtrl.state.historys.push({
-      path,
-      option,
-      beginTime: Date.now(),
-      name: 'push',
-      from: { x: 1, y: 0, scale: 1 },
-      now: { x: 0, y: 0, scale: 1 },
-      to: { x: 0, y: 0, scale: 1 },
-    });
-
-    navarCtrl.setState({
-      historys: [...navarCtrl.state.historys],
-    });
-
-    listenCache.forEach((fn: any) => {
-      fn(navarCtrl.state);
-    });
-  },
-  replace: () => undefined,
-  listen: (fn) => {
-    listenCache.add(fn);
-
-    return () => {
-      listenCache.delete(fn);
-    };
-  },
-};
+let initNavarControllerLock = false;
 
 export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => {
-  navarCtrl.state.historys[0].path = defaultPath;
+  if (!initNavarControllerLock) {
+    initNavarControllerLock = true;
+    navarManager.state.historys[0].path = defaultPath;
+  }
 
-  const [state, setState] = React.useState<IState>(navarCtrl.state);
+  const [state, setState] = React.useState<IState>(navarManager.state);
+  const { current } = React.useRef({
+    leftMoveToRight: false,
+    startX: 0,
+    move: 0,
+    endX: 0,
+  });
 
   React.useLayoutEffect(() => {
-    navarCtrl.setState = setState;
+    navarManager.setState = setState;
   }, []);
 
-  return <navarCtrl.ctx.Provider value={state}>{children}</navarCtrl.ctx.Provider>;
+  React.useEffect(() => {
+    const touchStart = (event: any) => {
+      if (device.isWechat || navarManager.state.historys.length === 1) {
+        return;
+      }
+      const startXPx = utils.getTouchStartX(event, true);
+      const startX = utils.getTouchStartX(event);
+
+      if (startXPx < 150) {
+        current.leftMoveToRight = true;
+        current.startX = startX;
+      }
+    };
+    const touchMove = (event: any) => {
+      const moveX = utils.getTouchX(event);
+
+      if (current.leftMoveToRight) {
+        const now = navarManager.state.historys.length - 1;
+        const nowHis = navarManager.state.historys[now];
+        const lastHis = navarManager.state.historys[now - 1];
+        if (nowHis && nowHis.update) {
+          nowHis.update({
+            gesturing: true,
+            x: moveX - current.startX,
+            y: 0,
+            scale: 1,
+            instant: true,
+          });
+        }
+        if (lastHis && lastHis.update) {
+          lastHis.update({
+            gesturing: true,
+            x: (moveX - current.startX) * navarManager.sinkRate - navarManager.sinkRate,
+            y: 0,
+            scale: 1,
+            instant: true,
+          });
+        }
+      }
+    };
+
+    const touchEnd = (event: any) => {
+      const endX = utils.getTouchX(event);
+
+      if (current.leftMoveToRight) {
+        const now = navarManager.state.historys.length - 1;
+        const nowHis = navarManager.state.historys[now];
+        const lastHis = navarManager.state.historys[now - 1];
+        let isOut = false;
+        if (endX - current.startX > 0.45) {
+          isOut = true;
+        }
+        if (nowHis && nowHis.update) {
+          nowHis.update({
+            gesturing: false,
+            x: isOut ? 1 : 0,
+            y: 0,
+            scale: 1,
+            instant: false,
+          });
+        }
+        if (lastHis && lastHis.update) {
+          lastHis.update({
+            gesturing: false,
+            x: isOut ? 0 : -navarManager.sinkRate,
+            y: 0,
+            scale: 1,
+            instant: false,
+          });
+
+          current.leftMoveToRight = false;
+          current.startX = 0;
+          current.move = 0;
+          current.endX = 0;
+        }
+        if (isOut) {
+          setTimeout(() => {
+            navarManager.pop(true);
+          }, navarManager.animeTime);
+        }
+      }
+    };
+
+    const animeMove = (event: any) => {
+      if (requestAnimationFrame) {
+        requestAnimationFrame(() => touchMove(event));
+      } else {
+        touchMove(event);
+      }
+    };
+
+    utils.addListenResture(touchStart, animeMove, touchEnd);
+
+    return () => {
+      utils.removeListenResture(touchStart, animeMove, touchEnd);
+    };
+  }, []);
+
+  return <navarManager.ctx.Provider value={state}>{children}</navarManager.ctx.Provider>;
 };

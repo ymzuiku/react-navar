@@ -1,21 +1,39 @@
+import * as React from 'react';
+
 import { isPc } from './device';
 
 type IEvent = (event: any) => any;
 
-export const getTouchX = (event: any) => {
+export const getTouchX = (event: any, px?: boolean) => {
+  if (px === true) {
+    return isPc ? event.clientX : event.changedTouches[0].clientX;
+  }
+
   return (isPc ? event.clientX : event.changedTouches[0].clientX) / window.innerWidth;
 };
 
-export const getTouchY = (event: any) => {
-  return (isPc ? event.clientY : event.changedTouches[0].clientY) / window.innerWidth;
+export const getTouchY = (event: any, px?: boolean) => {
+  if (px === true) {
+    return isPc ? event.clientY : event.changedTouches[0].clientY;
+  }
+
+  return (isPc ? event.clientY : event.changedTouches[0].clientY) / window.innerHeight;
 };
 
-export const getTouchStartX = (event: any) => {
-  return isPc ? event.clientX : event.touches[0].clientX;
+export const getTouchStartX = (event: any, px?: boolean) => {
+  if (px === true) {
+    return isPc ? event.clientX : event.touches[0].clientX;
+  }
+
+  return (isPc ? event.clientX : event.touches[0].clientX) / window.innerWidth;
 };
 
-export const getTouchStartY = (event: any) => {
-  return isPc ? event.clientY : event.touches[0].clientY;
+export const getTouchStartY = (event: any, px?: boolean) => {
+  if (px === true) {
+    return isPc ? event.clientY : event.touches[0].clientY;
+  }
+
+  return (isPc ? event.clientY : event.touches[0].clientY) / window.innerHeight;
 };
 
 export const addListenResture = (handleStart: IEvent, handleMove: IEvent, handleEnd: IEvent) => {
