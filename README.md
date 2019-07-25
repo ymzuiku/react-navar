@@ -1,4 +1,6 @@
-# react-navar
+# react-red
+
+> Red means passion, vitality and goals
 
 > 此库还在开发中
 
