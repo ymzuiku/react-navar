@@ -6,17 +6,18 @@ import { INavarFloatProps, Navar, navarManager, scope } from '../lib';
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 const Header: React.FC<INavarFloatProps> = ({ layout, onScroll }) => {
-  const [heightRate, setHeightRate] = React.useState(1);
+  const [heightRate, setHeightRate] = React.useState(-1);
 
   React.useEffect(() => {
     onScroll(({ scrollTop }: any) => {
-      setHeightRate(scope(scrollTop / 200, -0.2, 1));
+      setHeightRate(scope(scrollTop / 200, -1, 1));
     });
   }, [onScroll]);
 
   return (
     <div
       style={{
+        color: '#fff',
         position: 'fixed',
         left: 0,
         top: 0,
@@ -47,6 +48,8 @@ export const Desktop: React.FC<IProps> = () => {
     <Navar path="Desktop" layout={{ topHeight: 100 }} renderFloat={Floats}>
       <div style={{ width: '100%' }}>
         <div>desktop</div>
+        <div style={{ position: 'fixed', left: 0, top: 400, zIndex: 100 }}>in-float</div>
+
         <Cell style={{ color: '#00f' }} onClick={() => navarManager.push('SubPage')}>
           open sub-page
         </Cell>

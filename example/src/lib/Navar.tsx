@@ -36,7 +36,7 @@ interface IRenderProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTML
 }
 
 document.body.style.setProperty('--navar-background-color', '#fff');
-document.body.style.setProperty('--navar-mask-color', 'rgba(0,10,20,0.2)');
+document.body.style.setProperty('--navar-mask-color', 'rgba(0,5,15,0.23)');
 
 const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat }) => {
   const [anime, setAnime] = React.useState<IPosAnime>({ ...history.from, gesturing: false, instant: true });
@@ -96,6 +96,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
           transform: `translateX(${anime.x * 100}%)`,
           overflow: anime.gesturing ? 'hidden' : 'auto',
           WebkitOverflowScrolling: 'touch',
+          // boxShadow: `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.2})`,
           pointerEvents: anime.gesturing ? 'none' : undefined,
           zIndex: layout.zIndex,
           position: 'fixed',
