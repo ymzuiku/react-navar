@@ -1,11 +1,11 @@
 {
   "name": "react-navar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "navar.js",
   "types": "navar.d.ts",
   "license": "MIT",
   "scripts": {
-    "lib": "tscu example/src/lib --outDir es --outLib lib --copy 'package.json, README.md'"
+    "lib": "tscu example/src/navar --outDir es --outLib lib --copy 'package.json, README.md'"
   },
   "devDependencies": {
     "@types/jest": "24.0.13",
