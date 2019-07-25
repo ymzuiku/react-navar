@@ -8,7 +8,6 @@ import * as utils from './utils';
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children: any;
   defaultPath: string;
-  // screens: { [key: string]: any };
 }
 
 let initNavarControllerLock = false;
@@ -20,7 +19,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
   }
 
   const [state, setState] = React.useState<IState>(navarManager.state);
-  const { current } = React.useRef({
+  const { current: touchData } = React.useRef({
     startTime: 0,
     leftMoveToRight: false,
     startX: 0,
@@ -41,22 +40,22 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       const startX = utils.getTouchStartX(event);
 
       if (startXPx < 150) {
-        current.leftMoveToRight = true;
-        current.startX = startX;
-        current.startTime = Date.now();
+        touchData.leftMoveToRight = true;
+        touchData.startX = startX;
+        touchData.startTime = Date.now();
       }
     };
     const touchMove = (event: any) => {
       const moveX = utils.getTouchX(event);
 
-      if (current.leftMoveToRight) {
+      if (touchData.leftMoveToRight) {
         const now = navarManager.state.historys.length - 1;
         const nowHis = navarManager.state.historys[now];
         const lastHis = navarManager.state.historys[now - 1];
         if (nowHis && nowHis.update) {
           nowHis.update({
             gesturing: true,
-            x: moveX - current.startX,
+            x: moveX - touchData.startX,
             y: 0,
             scale: 1,
             instant: true,
@@ -65,7 +64,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
         if (lastHis && lastHis.update) {
           lastHis.update({
             gesturing: true,
-            x: (moveX - current.startX) * navarManager.sinkRate - navarManager.sinkRate,
+            x: (moveX - touchData.startX) * navarManager.sinkRate - navarManager.sinkRate,
             y: 0,
             scale: 1,
             instant: true,
@@ -77,14 +76,14 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
     const touchEnd = (event: any) => {
       const endX = utils.getTouchX(event);
 
-      if (current.leftMoveToRight) {
+      if (touchData.leftMoveToRight) {
         const now = navarManager.state.historys.length - 1;
         const nowHis = navarManager.state.historys[now];
         const lastHis = navarManager.state.historys[now - 1];
         let isOut = false;
-        if (endX - current.startX > 0.45) {
+        if (endX - touchData.startX > 0.45) {
           isOut = true;
-        } else if (endX - current.startX > 0.15 && Date.now() - current.startTime < 250) {
+        } else if (endX - touchData.startX > 0.15 && Date.now() - touchData.startTime < 250) {
           isOut = true;
         }
 
@@ -106,11 +105,11 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
             instant: false,
           });
 
-          current.leftMoveToRight = false;
-          current.startX = 0;
-          current.move = 0;
-          current.endX = 0;
-          current.startTime = 0;
+          touchData.leftMoveToRight = false;
+          touchData.startX = 0;
+          touchData.move = 0;
+          touchData.endX = 0;
+          touchData.startTime = 0;
         }
         if (isOut) {
           setTimeout(() => {

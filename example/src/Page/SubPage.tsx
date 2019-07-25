@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Cell } from '../components/Cell';
-import { Navar, navarManager } from '../navar';
+import { Navar, navarManager } from '../lib';
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 

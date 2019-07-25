@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { isPc } from './device';
 
 type IEvent = (event: any) => any;
@@ -58,4 +56,15 @@ export const removeListenResture = (handleStart: IEvent, handleMove: IEvent, han
     document.removeEventListener('touchmove', handleMove);
     document.removeEventListener('touchend', handleEnd);
   }
+};
+
+export const scope = (v: number, a: number, b: number) => {
+  if (v < a) {
+    return a;
+  }
+  if (v > b) {
+    return b;
+  }
+
+  return v;
 };

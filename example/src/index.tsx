@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { NavarController } from './navar';
+import { NavarController } from './lib';
 import { Desktop } from './Page/Desktop';
 import { SubPage } from './Page/SubPage';
 import { ThreePage } from './Page/ThreePage';

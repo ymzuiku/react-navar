@@ -39,9 +39,9 @@ export const isNeedIPhoneSafe = isIPhoneX || isIPhoneXSMax || isIPhoneXR;
 // 获取是否是 ios 或 android
 export const isNative = !isWechat && !isPc && window.innerHeight > 722;
 
-export const safeTop = isNative ? (isNeedIPhoneSafe ? 43 : 20) : 0;
+export const topSafe = isNative ? (isNeedIPhoneSafe ? 43 : 20) : 0;
 
-export const safeBottom = isNative ? (isNeedIPhoneSafe ? 25 : 0) : 0;
+export const bottomSafe = isNative ? (isNeedIPhoneSafe ? 25 : 0) : 0;
 
 document.body.style.width = '100%';
 document.body.style.minHeight = '100vh';
