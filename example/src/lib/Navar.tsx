@@ -71,6 +71,8 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
 
   const Childs = React.useMemo(() => children, []);
 
+  const isStatic = history.status === 'static';
+
   return (
     <>
       <div
@@ -93,15 +95,15 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
           height: '100%',
           backgroundColor: 'var(--navar-background-color)',
           transition: anime.instant ? undefined : history.transition,
-          transform: `translateX(${anime.x * 100}%)`,
+          transform: isStatic ? 'none' : `translateX(${anime.x * 100}%)`,
           overflow: anime.gesturing ? 'hidden' : 'auto',
           pointerEvents: anime.gesturing ? 'none' : undefined,
           WebkitOverflowScrolling: 'touch',
           // boxShadow: `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.2})`,
           zIndex: layout.zIndex,
           position: 'fixed',
-          left: 0,
-          top: 0,
+          left: isStatic ? anime.x : 0,
+          top: isStatic ? anime.y : 0,
           ...style,
         }}
         {...rest}>

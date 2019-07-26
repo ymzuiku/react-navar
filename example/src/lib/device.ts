@@ -48,26 +48,31 @@ document.body.style.minHeight = '100vh';
 document.body.style.backgroundColor = '#fff';
 document.body.style.margin = '0px';
 document.body.style.padding = '0px';
-
-// 阻止双指放大
-document.addEventListener('gesturestart', (event) => {
-  event.preventDefault();
-});
+document.body.style.position = 'relative';
 
 // 给root-div添加默认样式
 const rootEle = document.getElementById('root');
 if (rootEle) {
   rootEle.style.width = '100%';
   rootEle.style.height = '100%';
+  // rootEle.style.position = 'relative';
 }
 
-const lastTouchEnd = 0;
+// relative
+
 // 阻止双指放大
 document.addEventListener('touchstart', function(event) {
   if (event.touches.length > 1) {
     event.preventDefault();
   }
 });
+
+// 阻止双指放大
+document.addEventListener('gesturestart', (event) => {
+  event.preventDefault();
+});
+
+// let lastTouchEnd = 0;
 // // 阻止双击放大
 // document.addEventListener(
 //   'touchend',

@@ -31,7 +31,7 @@ export interface ICssvar {
   '--navar-transition'?: string;
 }
 
-export type ILifeName =
+export type IStatusType =
   | 'none'
   | 'push'
   | 'pop'
@@ -47,10 +47,10 @@ export interface IHistory {
   beginTime: number;
   from: IPos;
   index: number;
-  name: ILifeName;
   now: IPos;
   option?: any;
   path: string;
+  status: IStatusType;
   to: IPos;
   transition: string;
   update?(pos: IPosAnime): any;
