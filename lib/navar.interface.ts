@@ -5,6 +5,7 @@ export interface IPos {
 }
 
 export interface IPosAnime {
+  fix: number;
   gesturing: boolean;
   instant: boolean;
   scale: number;
@@ -17,13 +18,21 @@ export interface IScroll {
   top: number;
 }
 
+export interface ILayout {
+  bottomHeight: number;
+  bottomSafe: number;
+  topHeight: number;
+  topSafe: number;
+  zIndex: number;
+}
+
 export interface ICssvar {
   '--navar-background-color'?: string;
   '--navar-mask-color'?: string;
   '--navar-transition'?: string;
 }
 
-export type ILifeName =
+export type IStatusType =
   | 'none'
   | 'push'
   | 'pop'
@@ -39,10 +48,10 @@ export interface IHistory {
   beginTime: number;
   from: IPos;
   index: number;
-  name: ILifeName;
   now: IPos;
   option?: any;
   path: string;
+  status: IStatusType;
   to: IPos;
   transition: string;
   update?(pos: IPosAnime): any;

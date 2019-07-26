@@ -39,54 +39,49 @@ export const isNeedIPhoneSafe = isIPhoneX || isIPhoneXSMax || isIPhoneXR;
 // 获取是否是 ios 或 android
 export const isNative = !isWechat && !isPc && window.innerHeight > 722;
 
-export const safeTop = isNative ? (isNeedIPhoneSafe ? 43 : 20) : 0;
+export const topSafe = isNative ? (isNeedIPhoneSafe ? 43 : 20) : 0;
 
-export const safeBottom = isNative ? (isNeedIPhoneSafe ? 25 : 0) : 0;
+export const bottomSafe = isNative ? (isNeedIPhoneSafe ? 25 : 0) : 0;
 
 document.body.style.width = '100%';
 document.body.style.minHeight = '100vh';
 document.body.style.backgroundColor = '#fff';
 document.body.style.margin = '0px';
 document.body.style.padding = '0px';
-
-// 阻止双指放大
-document.addEventListener('gesturestart', (event) => {
-  event.preventDefault();
-});
+document.body.style.position = 'relative';
 
 // 给root-div添加默认样式
 const rootEle = document.getElementById('root');
 if (rootEle) {
   rootEle.style.width = '100%';
   rootEle.style.height = '100%';
+  // rootEle.style.position = 'relative';
 }
 
-window.addEventListener('load', () => {
-  let lastTouchEnd = 0;
-  // 阻止双指放大
-  document.addEventListener('touchstart', function(event) {
-    if (event.touches.length > 1) {
-      event.preventDefault();
-    }
-  });
-  // 阻止双击放大
-  document.addEventListener(
-    'touchend',
-    function(event) {
-      const now = new Date().getTime();
-      if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-      }
-      lastTouchEnd = now;
-    },
-    false,
-  );
-  // document.body.addEventListener(
-  //   'touchmove',
-  //   (event) => {
-  //     // 阻止默认的处理方式(阻止下拉滑动的效果)
-  //     event.stopPropagation();
-  //   },
-  //   { passive: false },
-  // );
+// relative
+
+// 阻止双指放大
+document.addEventListener('touchstart', function(event) {
+  if (event.touches.length > 1) {
+    event.preventDefault();
+  }
 });
+
+// 阻止双指放大
+document.addEventListener('gesturestart', (event) => {
+  event.preventDefault();
+});
+
+// let lastTouchEnd = 0;
+// // 阻止双击放大
+// document.addEventListener(
+//   'touchend',
+//   function(event) {
+//     const now = new Date().getTime();
+//     if (now - lastTouchEnd <= 300) {
+//       event.preventDefault();
+//     }
+//     lastTouchEnd = now;
+//   },
+//   false,
+// );

@@ -1,54 +1,87 @@
 import * as React from 'react';
 
-import { safeBottom, safeTop } from './device';
-import { IHistory, IPosAnime, IScroll } from './navar.interface';
+import { bottomSafe, topSafe } from './device';
+import { IHistory, ILayout, IPosAnime, IScroll } from './navar.interface';
 import { navarManager } from './navarManager';
 
 export interface IChildProps {
   scroll: IScroll;
 }
 
-interface IRenderProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+interface ILayoutParams {
+  bottomHeight?: number;
+  bottomSafe?: number;
+  topHeight?: number;
+  topSafe?: number;
+}
+
+export interface INavarFloatProps {
+  anime: IPosAnime;
   history: IHistory;
+  layout: ILayout;
+  onScroll(event: any): any;
 }
 
 interface INavarProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  layout?: ILayoutParams;
   nowPath?: string;
   path: string;
+  renderFloat?(props: INavarFloatProps): any;
+}
+
+interface IRenderProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  history: IHistory;
+  layout: ILayout;
+  renderFloat(props: INavarFloatProps): any;
 }
 
 document.body.style.setProperty('--navar-background-color', '#fff');
-document.body.style.setProperty('--navar-mask-color', 'rgba(0,10,20,0.2)');
+document.body.style.setProperty('--navar-mask-color', 'rgba(0,5,15,0.23)');
 
-const Render: React.FC<IRenderProps> = ({ history, children }) => {
-  const [scroll, setScroll] = React.useState({ top: 0, left: 0 });
-  const [anime, setAnime] = React.useState<IPosAnime>({ ...history.from, gesturing: false, instant: true });
+const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat, style, ...rest }) => {
+  const [anime, setAnime] = React.useState<IPosAnime>({
+    ...history.from,
+    fix: 1,
+    gesturing: false,
+    instant: true,
+  });
+  const { current: scrollObs } = React.useRef({
+    listenCache: new Set(),
+    listen: (fn: any) => {
+      scrollObs.listenCache.add(fn);
 
-  history.update = setAnime;
+      return () => {
+        scrollObs.listenCache.delete(fn);
+      };
+    },
+  });
 
   React.useEffect(() => {
+    history.update = setAnime;
+
     if (!anime.gesturing) {
-      setAnime({ ...history.from, gesturing: false, instant: true });
+      setAnime({ ...history.from, gesturing: false, fix: 1, instant: true });
     }
   }, [history]);
 
   React.useEffect(() => {
     if (anime.instant && !anime.gesturing) {
-      setAnime({ ...history.to, gesturing: false, instant: false });
+      setAnime({ ...history.to, gesturing: false, fix: 1, instant: false });
     }
   }, [anime]);
 
   const handleOnScroll = React.useCallback((event: any) => {
-    setScroll({
-      top: event.target.scrollTop,
-      left: event.target.scrollLeft,
-    });
+    scrollObs.listenCache.forEach((fn: any) => fn(event.target));
   }, []);
 
   const Childs = React.useMemo(() => children, []);
 
+  // const isStatic = !anime.instant && anime.gesturing && history.status === 'static';
+  const isStatic = false;
+  // console.log(history.path, isStatic, history);
+
   return (
-    <div style={{ width: '100%', height: '100%', position: 'fixed', left: 0, top: 0 }}>
+    <>
       <div
         style={{
           width: '100%',
@@ -59,31 +92,38 @@ const Render: React.FC<IRenderProps> = ({ history, children }) => {
           position: 'fixed',
           left: 0,
           top: 0,
-          zIndex: history.index * 10 - 1,
+          zIndex: layout.zIndex - 1,
         }}
       />
       <div
-        onScroll={handleOnScroll}
+        onScroll={renderFloat ? handleOnScroll : undefined}
         style={{
           width: '100%',
           height: '100%',
           backgroundColor: 'var(--navar-background-color)',
           transition: anime.instant ? undefined : history.transition,
-          transform: `translateX(${anime.x * 100}%)`,
-          zIndex: history.index * 10,
+          transform: !isStatic ? `translateX(${anime.x * 100}%)` : undefined,
+          overflow: anime.gesturing ? 'hidden' : 'auto',
+          pointerEvents: anime.gesturing ? 'none' : undefined,
+          WebkitOverflowScrolling: 'touch',
+          // boxShadow: `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.2})`,
+          zIndex: layout.zIndex,
           position: 'fixed',
-          left: 0,
-          top: 0,
-        }}>
-        <div style={{ height: safeTop }} />
+          left: isStatic ? anime.x : 0,
+          top: isStatic ? anime.y : 0,
+          ...style,
+        }}
+        {...rest}>
+        <div style={{ height: layout.topHeight + layout.topSafe }} />
         {Childs}
-        <div style={{ height: safeBottom }} />
+        {layout.bottomHeight > 0 && <div style={{ height: layout.bottomSafe + layout.bottomHeight }} />}
       </div>
-    </div>
+      {renderFloat && renderFloat({ anime, history, layout, onScroll: scrollObs.listen })}
+    </>
   );
 };
 
-export const Navar: React.FC<INavarProps> = ({ path, children }) => {
+export const Navar: React.FC<INavarProps> = ({ path, children, layout, renderFloat }) => {
   const { historys } = React.useContext(navarManager.ctx);
   let his: IHistory;
 
@@ -97,5 +137,14 @@ export const Navar: React.FC<INavarProps> = ({ path, children }) => {
     return null;
   }
 
-  return <Render history={his} children={children} />;
+  const theLayout = {
+    zIndex: (his.index + 1) * 10,
+    bottomSafe,
+    topSafe,
+    topHeight: 0,
+    bottomHeight: 0,
+    ...layout,
+  };
+
+  return <Render renderFloat={renderFloat as any} layout={theLayout as any} history={his} children={children} />;
 };
