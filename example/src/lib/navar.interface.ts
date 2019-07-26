@@ -5,6 +5,7 @@ export interface IPos {
 }
 
 export interface IPosAnime {
+  fix: number;
   gesturing: boolean;
   instant: boolean;
   scale: number;

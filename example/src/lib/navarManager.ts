@@ -51,6 +51,15 @@ export const navarManager: IManager = {
     if (instant) {
       isLock = false;
       navarManager.state.historys.pop();
+      navarManager.state.historys[navarManager.state.historys.length - 1] = {
+        ...navarManager.state.historys[navarManager.state.historys.length - 1],
+        beginTime: Date.now(),
+        status: 'static',
+        from: { x: 0, y: 0, scale: 1 },
+        now: { x: 0, y: 0, scale: 1 },
+        to: { x: 0, y: 0, scale: 1 },
+        transition: `all ${navarManager.animeTime / 1000}s ease-out`,
+      };
       navarManager.setState({
         historys: [...navarManager.state.historys],
       });
@@ -80,7 +89,7 @@ export const navarManager: IManager = {
     navarManager.state.historys[navarManager.state.historys.length - 2] = {
       ...navarManager.state.historys[navarManager.state.historys.length - 2],
       beginTime: Date.now(),
-      status: 'static',
+      status: 'sinkUp',
       from: { x: -navarManager.sinkRate, y: 0, scale: 1 },
       now: { x: 0, y: 0, scale: 1 },
       to: { x: 0, y: 0, scale: 1 },
@@ -94,6 +103,17 @@ export const navarManager: IManager = {
     setTimeout(() => {
       isLock = false;
       navarManager.state.historys.pop();
+
+      navarManager.state.historys[navarManager.state.historys.length - 1] = {
+        ...navarManager.state.historys[navarManager.state.historys.length - 1],
+        beginTime: Date.now(),
+        status: 'static',
+        from: { x: 0, y: 0, scale: 1 },
+        now: { x: 0, y: 0, scale: 1 },
+        to: { x: 0, y: 0, scale: 1 },
+        transition: `all ${navarManager.animeTime / 1000}s ease-out`,
+      };
+
       navarManager.setState({
         historys: [...navarManager.state.historys],
       });

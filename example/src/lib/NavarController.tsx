@@ -73,6 +73,8 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
 
     const touchMove = (event: any) => {
       if (!touchData.touchStarting) {
+        initTouchData();
+
         return;
       }
       const moveX = getTouchX(event);
@@ -102,6 +104,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
         if (nowHis && nowHis.update) {
           nowHis.update({
             gesturing: true,
+            fix: 1,
             x: scope(changeX - navarManager.moveThreshold, 0, 1),
             y: 0,
             scale: 1,
@@ -111,6 +114,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
         if (lastHis && lastHis.update) {
           lastHis.update({
             gesturing: true,
+            fix: 1,
             x: scope(
               (changeX - navarManager.moveThreshold) * navarManager.sinkRate - navarManager.sinkRate,
               -navarManager.sinkRate,
@@ -125,7 +129,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
     };
 
     const touchEnd = (event: any) => {
-      if (!touchData.touchStarting) {
+      if (!touchData.touchStarting && !touchData.touchMoving) {
         return;
       }
 
@@ -144,6 +148,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       if (nowHis && nowHis.update) {
         nowHis.update({
           gesturing: false,
+          fix: 1,
           x: isOut ? 1 : 0,
           y: 0,
           scale: 1,
@@ -153,6 +158,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       if (lastHis && lastHis.update) {
         lastHis.update({
           gesturing: false,
+          fix: 1,
           x: isOut ? 0 : -navarManager.sinkRate,
           y: 0,
           scale: 1,

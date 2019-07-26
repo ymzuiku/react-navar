@@ -39,7 +39,12 @@ document.body.style.setProperty('--navar-background-color', '#fff');
 document.body.style.setProperty('--navar-mask-color', 'rgba(0,5,15,0.23)');
 
 const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat, style, ...rest }) => {
-  const [anime, setAnime] = React.useState<IPosAnime>({ ...history.from, gesturing: false, instant: true });
+  const [anime, setAnime] = React.useState<IPosAnime>({
+    ...history.from,
+    fix: 1,
+    gesturing: false,
+    instant: true,
+  });
   const { current: scrollObs } = React.useRef({
     listenCache: new Set(),
     listen: (fn: any) => {
@@ -55,13 +60,13 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
     history.update = setAnime;
 
     if (!anime.gesturing) {
-      setAnime({ ...history.from, gesturing: false, instant: true });
+      setAnime({ ...history.from, gesturing: false, fix: 1, instant: true });
     }
   }, [history]);
 
   React.useEffect(() => {
     if (anime.instant && !anime.gesturing) {
-      setAnime({ ...history.to, gesturing: false, instant: false });
+      setAnime({ ...history.to, gesturing: false, fix: 1, instant: false });
     }
   }, [anime]);
 
@@ -71,7 +76,9 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
 
   const Childs = React.useMemo(() => children, []);
 
-  const isStatic = history.status === 'static';
+  // const isStatic = !anime.instant && anime.gesturing && history.status === 'static';
+  const isStatic = false;
+  // console.log(history.path, isStatic, history);
 
   return (
     <>
@@ -95,7 +102,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
           height: '100%',
           backgroundColor: 'var(--navar-background-color)',
           transition: anime.instant ? undefined : history.transition,
-          transform: isStatic ? 'none' : `translateX(${anime.x * 100}%)`,
+          transform: !isStatic ? `translateX(${anime.x * 100}%)` : undefined,
           overflow: anime.gesturing ? 'hidden' : 'auto',
           pointerEvents: anime.gesturing ? 'none' : undefined,
           WebkitOverflowScrolling: 'touch',
