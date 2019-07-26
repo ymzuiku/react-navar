@@ -6,7 +6,7 @@ import { INavarFloatProps, Navar, navarManager, scope } from '../lib';
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 const Header: React.FC<INavarFloatProps> = ({ layout, onScroll }) => {
-  const [heightRate, setHeightRate] = React.useState(-1);
+  const [heightRate, setHeightRate] = React.useState(0);
 
   React.useEffect(() => {
     onScroll(({ scrollTop }: any) => {

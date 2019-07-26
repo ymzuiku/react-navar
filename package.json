@@ -5,7 +5,7 @@
   "types": "navar.d.ts",
   "license": "MIT",
   "scripts": {
-    "lib": "tscu example/src/navar --outDir es --outLib lib --copy 'package.json, README.md'"
+    "lib": "tscu example/src/lib --outDir es --outLib lib --copy 'package.json, README.md'"
   },
   "devDependencies": {
     "@types/jest": "24.0.13",

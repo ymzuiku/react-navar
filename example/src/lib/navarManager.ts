@@ -5,7 +5,9 @@ import { IState } from './navar.interface';
 interface IManager {
   animeTime: number;
   ctx: React.Context<IState>;
+  moveThreshold: number;
   sinkRate: number;
+  startArea: number;
   state: IState;
   listen(fn: (state: IState) => any): any;
   pop(instant?: boolean): any;
@@ -16,6 +18,8 @@ interface IManager {
 
 const ANIMETIME = 250;
 const SINKRATE = 0.25;
+const MOVETHRESHOLD = 0.15;
+const STARTAREA = 0.7;
 
 const defaultState: IState = {
   historys: [
@@ -38,6 +42,8 @@ let isLock = false;
 export const navarManager: IManager = {
   animeTime: ANIMETIME,
   sinkRate: SINKRATE,
+  startArea: STARTAREA,
+  moveThreshold: MOVETHRESHOLD,
   setState: () => undefined,
   state: { ...defaultState },
   ctx: React.createContext({ ...defaultState }),

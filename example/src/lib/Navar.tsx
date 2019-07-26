@@ -38,7 +38,7 @@ interface IRenderProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTML
 document.body.style.setProperty('--navar-background-color', '#fff');
 document.body.style.setProperty('--navar-mask-color', 'rgba(0,5,15,0.23)');
 
-const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat }) => {
+const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat, style, ...rest }) => {
   const [anime, setAnime] = React.useState<IPosAnime>({ ...history.from, gesturing: false, instant: true });
   const { current: scrollObs } = React.useRef({
     listenCache: new Set(),
@@ -95,14 +95,16 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
           transition: anime.instant ? undefined : history.transition,
           transform: `translateX(${anime.x * 100}%)`,
           overflow: anime.gesturing ? 'hidden' : 'auto',
+          pointerEvents: anime.gesturing ? 'none' : undefined,
           WebkitOverflowScrolling: 'touch',
           // boxShadow: `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.2})`,
-          pointerEvents: anime.gesturing ? 'none' : undefined,
           zIndex: layout.zIndex,
           position: 'fixed',
           left: 0,
           top: 0,
-        }}>
+          ...style,
+        }}
+        {...rest}>
         <div style={{ height: layout.topHeight + layout.topSafe }} />
         {Childs}
         {layout.bottomHeight > 0 && <div style={{ height: layout.bottomSafe + layout.bottomHeight }} />}
