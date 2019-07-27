@@ -47,7 +47,6 @@ export const Desktop: React.FC<IProps> = () => {
   return (
     <Navar path="Desktop" layout={{ topHeight: 100 }} renderFloat={Floats}>
       <div style={{ width: '100%' }}>
-        <div>desktop</div>
         <div style={{ position: 'fixed', left: 0, top: 400, zIndex: 100 }}>in-float</div>
 
         <Cell style={{ color: '#00f' }} onClick={() => navarManager.push('SubPage')}>
@@ -62,9 +61,9 @@ export const Desktop: React.FC<IProps> = () => {
         </Cell>
         {new Array(30).fill('1').map((v, i) => {
           return (
-            <div key={i}>
+            <Cell key={i}>
               <div className="hr-cell">desktop {i}</div>
-            </div>
+            </Cell>
           );
         })}
       </div>

@@ -2992,6 +2992,11 @@ cssesc@^3.0.0:
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
+cssin@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/cssin/-/cssin-1.0.5.tgz#44c62b0c415d8eb5b08700024a00213ce7bbaa45"
+  integrity sha512-pKLBLesm7eZb4TBOHbVI8sVtIaLqwtfntVgsr+ZbU3F3LzyJVdOK1vhG4t+s/gQNq8VEhqjyK95QGEYSd7Stbg==
+
 cssnano-preset-default@^4.0.7:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/cssnano-preset-default/-/cssnano-preset-default-4.0.7.tgz#51ec662ccfca0f88b396dcd9679cdb931be17f76"

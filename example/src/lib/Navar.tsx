@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import * as React from 'react';
 
 import { bottomSafe, topSafe } from './device';
@@ -45,6 +47,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
     gesturing: false,
     instant: true,
   });
+
   const { current: scrollObs } = React.useRef({
     listenCache: new Set(),
     listen: (fn: any) => {

@@ -1,3 +1,5 @@
+import { cssin } from 'cssin';
+
 const ua = navigator.userAgent;
 export const isAndroid = /(?:Android)/.test(ua);
 // const isAndroid = true;
@@ -34,6 +36,8 @@ export const isIPhoneXR =
   window.screen.width === 414 &&
   window.screen.height === 896;
 
+export const onePx = window.devicePixelRatio ? 1 / window.devicePixelRatio : 1;
+
 export const isNeedIPhoneSafe = isIPhoneX || isIPhoneXSMax || isIPhoneXR;
 
 // 获取是否是 ios 或 android
@@ -58,7 +62,53 @@ if (rootEle) {
   // rootEle.style.position = 'relative';
 }
 
-// relative
+const getRandomString = (length = 12) => {
+  length = length || 32;
+  //设置随机数范围
+  const charts = 'abcdefghijklmnopqrstuvwxyz_0123456789';
+  const maxPos = charts.length;
+  let result = 'r';
+  for (let i = 0; i < length - 1; i++) {
+    //产生随机数方式
+    result += charts.charAt(Math.floor(Math.random() * maxPos));
+  }
+
+  return result;
+};
+
+cssin(`
+body {
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 16px;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+input {
+  background-color: #f3f3f3;
+  outline: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  -webkit-appearance: none;
+}
+
+div, button {
+  user-select: none;
+}
+
+button {
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  user-select: none;
+}
+`);
 
 // 阻止双指放大
 document.addEventListener('touchstart', function(event) {

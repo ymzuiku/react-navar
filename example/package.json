@@ -9,6 +9,7 @@
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.5",
+    "cssin": "^1.0.5",
     "immer": "^3.1.3",
     "querystring": "^0.2.0",
     "react": "^16.8.6",
