@@ -5,6 +5,7 @@ import { NavarController } from './lib';
 import { Desktop } from './Page/Desktop';
 import { SubPage } from './Page/SubPage';
 import { ThreePage } from './Page/ThreePage';
+import './tailwind.css';
 
 const App: React.FC = () => {
   return (
