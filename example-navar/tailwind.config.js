@@ -29,14 +29,28 @@ const spacing = {
   '8': '2rem',
   '10': '2.5rem',
   '12': '3rem',
+  '13': '3.25rem',
+  '14': '3.5rem',
+  '15': '3.75rem',
   '16': '4rem',
+  '17': '4.25rem',
+  '18': '4.5rem',
+  '19': '4.75rem',
   '20': '5rem',
+  '21': '5.25rem',
+  '22': '5.5rem',
+  '23': '5.75rem',
   '24': '6rem',
   '32': '8rem',
   '40': '10rem',
   '48': '12rem',
   '56': '14rem',
   '64': '16rem',
+  'top-safe': 'var(--top-safe)',
+  'bottom-safe': 'var(--bottom-safe)',
+  'top-bar': 'var(--top-bar)',
+  'top-max-bar': 'var(--top-max-bar)',
+  'bottom-bar': 'var(--bottom-bar)',
 };
 
 const rate = {
@@ -227,7 +241,8 @@ module.exports = {
       full: '9999px',
     },
     borderWidth: {
-      default: '1px',
+      default: '0.05rem',
+      '1': '1px',
       '0': '0',
       '2': '2px',
       '4': '4px',
@@ -303,6 +318,7 @@ module.exports = {
       mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
     },
     fontSize: {
+      xxs: '0.64rem',
       xs: '0.75rem',
       sm: '0.875rem',
       base: '1rem',
@@ -499,6 +515,11 @@ module.exports = {
     function({ addBase }) {
       addBase({
         body: {
+          '--top-safe': '0px',
+          '--top-bar': '3.3rem',
+          '--top-max-bar': '5.2rem',
+          '--botom-safe': '0px',
+          '--bottom-bar': '3.3rem',
           position: 'relative',
           WebkitTapHighlightColor: 'transparent',
           WebkitFontSmoothing: 'antialiased',

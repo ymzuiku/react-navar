@@ -47,12 +47,14 @@ export const topSafe = isNative ? (isNeedIPhoneSafe ? 43 : 20) : 0;
 
 export const bottomSafe = isNative ? (isNeedIPhoneSafe ? 25 : 0) : 0;
 
-document.body.style.width = '100%';
-document.body.style.minHeight = '100vh';
-document.body.style.backgroundColor = '#fff';
-document.body.style.margin = '0px';
-document.body.style.padding = '0px';
-document.body.style.position = 'relative';
+// document.body.style.width = '100%';
+// document.body.style.minHeight = '100vh';
+// document.body.style.backgroundColor = '#fff';
+// document.body.style.margin = '0px';
+// document.body.style.padding = '0px';
+// document.body.style.position = 'relative';
+document.body.style.setProperty('--top-safe', `${topSafe}px`);
+document.body.style.setProperty('--bottom-safe', `${bottomSafe}px`);
 
 // 给root-div添加默认样式
 const rootEle = document.getElementById('root');

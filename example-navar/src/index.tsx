@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { NavarController } from './lib';
-import { Desktop } from './Page/Desktop';
-import { SubPage } from './Page/SubPage';
-import { ThreePage } from './Page/ThreePage';
+import * as Pages from './Pages';
 import './tailwind.auto.css';
 
 const App: React.FC = () => {
   return (
     <NavarController defaultPath="Desktop">
-      <Desktop />
-      <SubPage />
-      <ThreePage />
+      {Object.keys(Pages).map((k: any) => {
+        const Comp = (Pages as any)[k];
+
+        return <Comp key={k} />;
+      })}
     </NavarController>
   );
 };
