@@ -7,7 +7,37 @@ const makecss = (start, end, callback) => {
   return list;
 };
 
+const mapToObj = (obj, callback) => {
+  let list = {};
+  Object.keys(obj).forEach((k) => {
+    list[k] = callback(obj[k], k);
+  });
+  return list;
+};
+
 const allVariants = ['responsive', 'active', 'hover', 'focus'];
+
+const spacing = {
+  px: '1px',
+  '0': '0',
+  '1': '0.25rem',
+  '2': '0.5rem',
+  '3': '0.75rem',
+  '4': '1rem',
+  '5': '1.25rem',
+  '6': '1.5rem',
+  '8': '2rem',
+  '10': '2.5rem',
+  '12': '3rem',
+  '16': '4rem',
+  '20': '5rem',
+  '24': '6rem',
+  '32': '8rem',
+  '40': '10rem',
+  '48': '12rem',
+  '56': '14rem',
+  '64': '16rem',
+};
 
 module.exports = {
   prefix: '',
@@ -135,27 +165,7 @@ module.exports = {
         900: '#702459',
       },
     },
-    spacing: {
-      px: '1px',
-      '0': '0',
-      '1': '0.25rem',
-      '2': '0.5rem',
-      '3': '0.75rem',
-      '4': '1rem',
-      '5': '1.25rem',
-      '6': '1.5rem',
-      '8': '2rem',
-      '10': '2.5rem',
-      '12': '3rem',
-      '16': '4rem',
-      '20': '5rem',
-      '24': '6rem',
-      '32': '8rem',
-      '40': '10rem',
-      '48': '12rem',
-      '56': '14rem',
-      '64': '16rem',
-    },
+    spacing,
     backgroundColor: (theme) => theme('colors'),
     backgroundPosition: {
       bottom: 'bottom',
@@ -356,7 +366,10 @@ module.exports = {
       'right-top': 'right top',
       top: 'top',
     },
-    opacity: makecss(0, 100, (v) => [v, `0.${v}`]),
+    opacity: {
+      ...makecss(0, 99, (v) => [v, `0.${v}`]),
+      1: 1,
+    },
     order: {
       first: '-9999',
       last: '9999',
@@ -414,6 +427,8 @@ module.exports = {
     zIndex: {
       auto: 'auto',
       ...makecss(0, 100, (v) => [v, v]),
+      ...makecss(0, 10, (v) => [v * 10, v * 10]),
+      ...makecss(0, 10, (v) => [v * 100, v * 100]),
     },
   },
   variants: {
@@ -516,11 +531,60 @@ module.exports = {
     },
     function({ addUtilities, addVariant, addBase, variants }) {
       const transition = {
-        ...makecss(0, 40, (v) => [`.transition-${v * 10}`, { transition: `all ${v / 10}s ease-out` }]),
-        ...makecss(0, 40, (v) => [`.transition-${v * 10}-ease-in`, { transition: `all ${v / 10}s ease-in` }]),
-        ...makecss(0, 40, (v) => [`.transition-${v * 10}-ease-out`, { transition: `all ${v / 10}s ease-out` }]),
-        ...makecss(0, 40, (v) => [`.transition-${v * 10}-ease-in-out`, { transition: `all ${v / 10}s ease-in-out` }]),
-        ...makecss(0, 40, (v) => [`.transition-${v * 10}-linear`, { transition: `all ${v / 10}s linear` }]),
+        '.ease-in-0': {
+          transition: `all 0 ease-in`,
+        },
+        '.ease-in-1': {
+          transition: `all 0.5s ease-in`,
+        },
+        '.ease-in-2': {
+          transition: `all 1s ease-in`,
+        },
+        '.ease-in-3': {
+          transition: `all 1.5s ease-in`,
+        },
+        '.ease-in-4': {
+          transition: `all 2s ease-in`,
+        },
+        '.ease-in-5': {
+          transition: `all 2.5s ease-in`,
+        },
+        '.ease-in-6': {
+          transition: `all 3s ease-in`,
+        },
+        '.ease-in-7': {
+          transition: `all 3.5s ease-in`,
+        },
+        '.ease-in-8': {
+          transition: `all 4s ease-in`,
+        },
+        '.ease-out-0': {
+          transition: `all 0 ease-out`,
+        },
+        '.ease-out-1': {
+          transition: `all 0.5s ease-out`,
+        },
+        '.ease-out-2': {
+          transition: `all 1s ease-out`,
+        },
+        '.ease-out-3': {
+          transition: `all 1.5s ease-out`,
+        },
+        '.ease-out-4': {
+          transition: `all 2s ease-out`,
+        },
+        '.ease-out-5': {
+          transition: `all 2.5s ease-out`,
+        },
+        '.ease-out-6': {
+          transition: `all 3s ease-out`,
+        },
+        '.ease-out-7': {
+          transition: `all 3.5s ease-out`,
+        },
+        '.ease-out-8': {
+          transition: `all 4s ease-out`,
+        },
       };
 
       addUtilities(transition, {
@@ -529,12 +593,15 @@ module.exports = {
     },
     function({ addUtilities, addVariant, addBase }) {
       const translate = {
-        ...makecss(0, 100, (v) => [`.tran-x-${v}`, { translate: `transformX(${v}px)` }]),
-        ...makecss(0, 100, (v) => [`.tran-x-${v}%`, { translate: `transformX(${v}%)` }]),
-        ...makecss(0, 100, (v) => [`.tran-y-${v}`, { translate: `transformY(${v}px)` }]),
-        ...makecss(0, 100, (v) => [`.tran-y-${v}%`, { translate: `transformY(${v}%)` }]),
-        ...makecss(0, 100, (v) => [`.tran-s-${v}%`, { translate: `scale(${v / 100}, ${v / 100})` }]),
-        ...makecss(0, 365, (v) => [`.tran-r-${v}`, { translate: `rotate(${v}deg)` }]),
+        ...mapToObj(spacing, (v, k) => ({ [`.transform-x-${k}`]: { translate: `transformX(${v})` } })),
+        ...makecss(0, 10, (v) => [`.transform-x-${v * 10}%`, { translate: `transformX(${v}%)` }]),
+        ...mapToObj(spacing, (v, k) => ({ [`.transform-y-${k}`]: { translate: `transformX(${v})` } })),
+        ...makecss(0, 10, (v) => [`.transform-y-${v * 10}%`, { translate: `transformY(${v}%)` }]),
+        ...makecss(0, 100, (v) => [`.scale-${v}%`, { translate: `scale(${v / 100}, ${v / 100})` }]),
+        ...makecss(0, 7, (v) => [`.tran-r-${v * 45}`, { translate: `rotate(${v}deg)` }]),
+        '.rotate-360': {
+          translate: 'rotate(359deg)',
+        },
       };
 
       addUtilities(translate, {
