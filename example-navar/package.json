@@ -23,7 +23,7 @@
     "watch:css": "postcss tailwind.config.css -o src/tailwind.auto.css -w",
     "start:css": "postcss tailwind.config.css -o src/tailwind.auto.css",
     "build:css": "NODE_ENV=production postcss tailwind.config.css -o src/tailwind.auto.css",
-    "start": "react-scripts start",
+    "start": "npm run watch:css & react-scripts start",
     "build": "npm run build:css && react-scripts build && npm run start:css",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

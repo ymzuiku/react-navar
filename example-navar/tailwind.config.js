@@ -315,6 +315,7 @@ module.exports = {
       '6xl': '4rem',
     },
     fontWeight: {
+      ...makecss(1, 9, (v) => [v * 100, v * 100]),
       hairline: '100',
       thin: '200',
       light: '300',
@@ -506,7 +507,7 @@ module.exports = {
         },
         input: {
           backgroundColor: '#f3f3f3',
-          outline: 'none',
+          outline: 'none !important',
           border: 'none',
           padding: '0px',
           margin: '0px',
@@ -517,8 +518,18 @@ module.exports = {
         },
         button: {
           WebkitAppearance: 'none',
-          outline: 'none',
+          outline: 'none !important',
           userSelect: 'none',
+          '&:active': {
+            outline: 'none',
+            WebkitAppearance: 'none',
+            userSelect: 'none',
+          },
+          '&:hover': {
+            outline: 'none',
+            WebkitAppearance: 'none',
+            userSelect: 'none',
+          },
         },
       });
     },
