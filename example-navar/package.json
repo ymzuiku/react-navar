@@ -20,10 +20,11 @@
     "typescript": "3.5.3"
   },
   "scripts": {
-    "build:css": "postcss tailwind.config.css -o src/tailwind.css",
-    "build:css-prod": "NODE_ENV=production postcss tailwind.config.css -o src/tailwind.css",
-    "start": "react-scripts start",
-    "build": "npm run build:css-prod && react-scripts build && npm run build:css",
+    "watch:css": "postcss tailwind.config.css -o src/tailwind.auto.css -w",
+    "start:css": "postcss tailwind.config.css -o src/tailwind.auto.css",
+    "build:css": "NODE_ENV=production postcss tailwind.config.css -o src/tailwind.auto.css",
+    "start": "npm run watch:css & react-scripts start",
+    "build": "npm run build:css && react-scripts build && npm run start:css",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lib": "tscu example/src/lib --outDir lib",

@@ -126,7 +126,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
   );
 };
 
-export const Navar: React.FC<INavarProps> = ({ path, children, layout, renderFloat }) => {
+export const Navar: React.FC<INavarProps> = ({ path, layout, renderFloat, ...rest }) => {
   const { historys } = React.useContext(navarManager.ctx);
   let his: IHistory;
 
@@ -149,5 +149,5 @@ export const Navar: React.FC<INavarProps> = ({ path, children, layout, renderFlo
     ...layout,
   };
 
-  return <Render renderFloat={renderFloat as any} layout={theLayout as any} history={his} children={children} />;
+  return <Render renderFloat={renderFloat as any} layout={theLayout as any} history={his} {...rest} />;
 };

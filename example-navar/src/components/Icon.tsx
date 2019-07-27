@@ -7,7 +7,7 @@ export interface IIcon extends React.DetailedHTMLProps<React.HTMLAttributes<HTML
   dotColor?: string;
   dotSize?: number;
   font?: string;
-  symbol?: string;
+  link?: string;
 }
 export const Icon: React.FC<IIcon> = ({
   dot,
@@ -15,7 +15,7 @@ export const Icon: React.FC<IIcon> = ({
   dotColor = '#f33',
   dotBorder = '1px solid #fff',
   font,
-  symbol,
+  link,
   className = '',
   ...props
 }) => {
@@ -23,10 +23,10 @@ export const Icon: React.FC<IIcon> = ({
 
   if (font) {
     icon = <i className={`iconfont ${font} ${className}`} {...props} />;
-  } else if (symbol) {
+  } else if (link) {
     icon = (
-      <svg className={`icon ${className}`} aria-hidden="true" {...(props as any)}>
-        <use xlinkHref={`#${symbol}`} />
+      <svg className={`icon ${className}`} aria-hidden="true" {...props as any}>
+        <use xlinkHref={`#${link}`} />
       </svg>
     );
   }
