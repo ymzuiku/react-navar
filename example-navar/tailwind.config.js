@@ -1,6 +1,6 @@
 const makecss = (start, end, callback) => {
   let list = {};
-  for (let i = start; i < end; i++) {
+  for (let i = start; i <= end; i++) {
     const v = callback(i);
     list[v[0]] = v[1];
   }
@@ -10,7 +10,8 @@ const makecss = (start, end, callback) => {
 const makeByObj = (obj, callback) => {
   let list = {};
   Object.keys(obj).forEach((k) => {
-    list[k] = callback(obj[k], k);
+    const v = callback(obj[k], k);
+    list[v[0]] = v[1];
   });
   return list;
 };
@@ -26,8 +27,11 @@ const spacing = {
   '4': '1rem',
   '5': '1.25rem',
   '6': '1.5rem',
+  '7': '1.75rem',
   '8': '2rem',
+  '9': '2.25rem',
   '10': '2.5rem',
+  '11': '2.75rem',
   '12': '3rem',
   '13': '3.25rem',
   '14': '3.5rem',
@@ -46,6 +50,10 @@ const spacing = {
   '48': '12rem',
   '56': '14rem',
   '64': '16rem',
+  '72': '18rem',
+  '80': '20rem',
+  '88': '22rem',
+  '96': '24rem',
   'top-safe': 'var(--top-safe)',
   'bottom-safe': 'var(--bottom-safe)',
   'top-bar': 'var(--top-bar)',
@@ -238,10 +246,12 @@ module.exports = {
       sm: '0.125rem',
       default: '0.25rem',
       lg: '0.5rem',
+      xl: '1rem',
+      '2xl': '2rem',
       full: '9999px',
     },
     borderWidth: {
-      default: '0.05rem',
+      default: '0.07rem',
       '1': '1px',
       '0': '0',
       '2': '2px',
@@ -251,9 +261,9 @@ module.exports = {
     boxShadow: {
       default: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
       md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-      lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-      xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-      '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+      lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.06)',
+      xl: '0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.06)',
+      '2xl': '0 25px 30px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       outline: '0 0 0 3px rgba(66, 153, 225, 0.5)',
       none: 'none',
@@ -560,55 +570,55 @@ module.exports = {
           transition: `all 0 ease-in`,
         },
         '.ease-in-1': {
-          transition: `all 0.5s ease-in`,
+          transition: `all 0.1s ease-in`,
         },
         '.ease-in-2': {
-          transition: `all 1s ease-in`,
+          transition: `all 0.15s ease-in`,
         },
         '.ease-in-3': {
-          transition: `all 1.5s ease-in`,
+          transition: `all 0.2s ease-in`,
         },
         '.ease-in-4': {
-          transition: `all 2s ease-in`,
+          transition: `all 0.25s ease-in`,
         },
         '.ease-in-5': {
-          transition: `all 2.5s ease-in`,
+          transition: `all 0.3s ease-in`,
         },
         '.ease-in-6': {
-          transition: `all 3s ease-in`,
+          transition: `all 0.35s ease-in`,
         },
         '.ease-in-7': {
-          transition: `all 3.5s ease-in`,
+          transition: `all 0.4s ease-in`,
         },
         '.ease-in-8': {
-          transition: `all 4s ease-in`,
+          transition: `all 0.5s ease-in`,
         },
         '.ease-out-0': {
           transition: `all 0 ease-out`,
         },
         '.ease-out-1': {
-          transition: `all 0.5s ease-out`,
+          transition: `all 0.1s ease-out`,
         },
         '.ease-out-2': {
-          transition: `all 1s ease-out`,
+          transition: `all 0.15s ease-out`,
         },
         '.ease-out-3': {
-          transition: `all 1.5s ease-out`,
+          transition: `all 0.2s ease-out`,
         },
         '.ease-out-4': {
-          transition: `all 2s ease-out`,
+          transition: `all 0.25s ease-out`,
         },
         '.ease-out-5': {
-          transition: `all 2.5s ease-out`,
+          transition: `all 0.3s ease-out`,
         },
         '.ease-out-6': {
-          transition: `all 3s ease-out`,
+          transition: `all 0.35s ease-out`,
         },
         '.ease-out-7': {
-          transition: `all 3.5s ease-out`,
+          transition: `all 0.4s ease-out`,
         },
         '.ease-out-8': {
-          transition: `all 4s ease-out`,
+          transition: `all 0.5s ease-out`,
         },
       };
 
@@ -618,12 +628,12 @@ module.exports = {
     },
     function({ addUtilities, addVariant, addBase }) {
       const translate = {
-        ...makeByObj({ ...spacing, rate }, (v, k) => ({ [`.transform-x-${k}`]: { translate: `transformX(${v})` } })),
-        ...makeByObj({ ...spacing, rate }, (v, k) => ({ [`.transform-y-${k}`]: { translate: `transformX(${v})` } })),
-        ...makecss(0, 100, (v) => [`.scale-${v}%`, { translate: `scale(${v / 100}, ${v / 100})` }]),
-        ...makecss(0, 7, (v) => [`.tran-r-${v * 45}`, { translate: `rotate(${v}deg)` }]),
+        ...makeByObj({ ...spacing, rate }, (v, k) => [`.translate-x-${k}`, { transform: `translateX(${v})` }]),
+        ...makeByObj({ ...spacing, rate }, (v, k) => [`.translate-y-${k}`, { transform: `transformX(${v})` }]),
+        ...makecss(0, 100, (v) => [`.scale-${v}`, { transform: `scale(${v / 100}, ${v / 100})` }]),
+        ...makecss(0, 7, (v) => [`.rotate-${v * 45}`, { transform: `rotate(${v}deg)` }]),
         '.rotate-360': {
-          translate: 'rotate(359deg)',
+          transform: 'rotate(359deg)',
         },
       };
 

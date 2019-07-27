@@ -6,18 +6,19 @@ interface IManager {
   animeTime: number;
   ctx: React.Context<IState>;
   moveThreshold: number;
+  // pop(instant?: boolean): any;
+  pop: any;
   sinkRate: number;
   startArea: number;
   state: IState;
   listen(fn: (state: IState) => any): any;
-  pop(instant?: boolean): any;
   push(path: string, option?: any): any;
   replace(path: string, option?: any): any;
   setState(s: IState): any;
 }
 
 const ANIMETIME = 250;
-const SINKRATE = 0.25;
+const SINKRATE = 0.3;
 const MOVETHRESHOLD = 0.15;
 const STARTAREA = 0.48;
 
@@ -47,8 +48,8 @@ export const navarManager: IManager = {
   setState: () => undefined,
   state: { ...defaultState },
   ctx: React.createContext({ ...defaultState }),
-  pop: (instant) => {
-    if (instant) {
+  pop: ((instant: boolean) => {
+    if (typeof instant === 'boolean' && instant) {
       isLock = false;
       navarManager.state.historys.pop();
       navarManager.state.historys[navarManager.state.historys.length - 1] = {
@@ -58,7 +59,7 @@ export const navarManager: IManager = {
         from: { x: 0, y: 0, scale: 1 },
         now: { x: 0, y: 0, scale: 1 },
         to: { x: 0, y: 0, scale: 1 },
-        transition: `all ${navarManager.animeTime / 1000}s ease-out`,
+        transition: `all ${(navarManager.animeTime * 1.25) / 1000}s ease-out`,
       };
       navarManager.setState({
         historys: [...navarManager.state.historys],
@@ -93,7 +94,7 @@ export const navarManager: IManager = {
       from: { x: -navarManager.sinkRate, y: 0, scale: 1 },
       now: { x: 0, y: 0, scale: 1 },
       to: { x: 0, y: 0, scale: 1 },
-      transition: `all ${navarManager.animeTime / 1000}s ease-out`,
+      transition: `all ${(navarManager.animeTime * 1.25) / 1000}s ease-out`,
     };
 
     navarManager.setState({
@@ -122,7 +123,7 @@ export const navarManager: IManager = {
         fn(navarManager.state);
       });
     }, navarManager.animeTime);
-  },
+  }) as any,
   push: (path, option) => {
     navarManager.state.historys.push({
       path,

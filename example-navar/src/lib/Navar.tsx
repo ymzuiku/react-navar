@@ -74,10 +74,15 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
   }, [anime]);
 
   const handleOnScroll = React.useCallback((event: any) => {
-    scrollObs.listenCache.forEach((fn: any) => fn(event.target));
+    const target = event.target;
+    if (requestAnimationFrame) {
+      requestAnimationFrame(() => {
+        scrollObs.listenCache.forEach((fn: any) => fn(target));
+      });
+    } else {
+      scrollObs.listenCache.forEach((fn: any) => fn(target));
+    }
   }, []);
-
-  const Childs = React.useMemo(() => children, []);
 
   // const isStatic = !anime.instant && anime.gesturing && history.status === 'static';
   const isStatic = false;
@@ -107,7 +112,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
           transition: anime.instant ? undefined : history.transition,
           transform: !isStatic ? `translateX(${anime.x * 100}%)` : undefined,
           overflow: anime.gesturing ? 'hidden' : 'auto',
-          pointerEvents: anime.gesturing ? 'none' : undefined,
+          pointerEvents: anime.gesturing && anime.x !== 0 ? 'none' : undefined,
           WebkitOverflowScrolling: 'touch',
           // boxShadow: `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.2})`,
           zIndex: layout.zIndex,
@@ -118,7 +123,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat
         }}
         {...rest}>
         <div style={{ height: layout.topHeight + layout.topSafe }} />
-        {Childs}
+        {children}
         {layout.bottomHeight > 0 && <div style={{ height: layout.bottomSafe + layout.bottomHeight }} />}
       </div>
       {renderFloat && renderFloat({ anime, history, layout, onScroll: scrollObs.listen })}

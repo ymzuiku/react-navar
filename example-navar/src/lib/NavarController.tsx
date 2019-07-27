@@ -56,7 +56,13 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       touchData.endY = 0;
       touchData.startTime = 0;
     };
+
     const touchStart = (event: any) => {
+      // 阻止双指放大
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+
       if (navarManager.state.historys.length === 1) {
         return;
       }
@@ -74,6 +80,11 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
     };
 
     const touchMove = (event: any) => {
+      // 阻止双指放大
+      if (event.changedTouches.length > 1) {
+        event.preventDefault();
+      }
+
       if (!touchData.touchStarting) {
         initTouchData();
 
@@ -130,7 +141,16 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       }
     };
 
+    let lastTouchEndTime = 0;
+    // 阻止双击放大
+
     const touchEnd = (event: any) => {
+      const nowTime = new Date().getTime();
+      if (nowTime - lastTouchEndTime <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEndTime = nowTime;
+
       if (!touchData.touchStarting && !touchData.touchMoving) {
         return;
       }

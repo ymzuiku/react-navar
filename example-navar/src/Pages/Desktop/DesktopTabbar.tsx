@@ -1,32 +1,57 @@
 import * as React from 'react';
 
 import { Icon } from '../../components/Icon';
+import { Memo } from '../../components/Memo';
 import { TabBar } from '../../components/TabBar';
+import { useEvent } from '../../hooks';
 
-interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+interface IProps {
+  selectedIndex: number;
+  onChange(selectedIndex: number): void;
+}
 
 interface IItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   icon: string;
+  isSelected: boolean;
   title: string;
 }
 
-const Item: React.FC<IItemProps> = ({ icon, title }) => {
+const Item: React.FC<IItemProps> = ({ icon, title, onClick, isSelected }) => {
   return (
-    <div className="h-14 flex-col flex items-center justify-center">
-      <Icon className="w-6 mt-2 h-6 text-gray-700" link={icon} />
-      <p className="text-xxs mt-2 text-gray-700">{title}</p>
+    <div onClick={onClick} className="h-14 my-1 flex-col flex items-center justify-center">
+      <Icon className={`ease-out-3 w-7 h-7 ${isSelected ? 'text-teal-900' : 'text-teal-500'}`} link={icon} />
+      <p className={`text-xxs mt-1 ${isSelected ? 'text-teal-900' : 'text-teal-500'}`}>{title}</p>
     </div>
   );
 };
 
-export const DesktopTabbar: React.FC<IProps> = () => {
-  return (
-    <div className="fixed left-0 bottom-0 z-10 flex flex-row items-center justify-around pb-bottom-safe bg-gray-100 w-vw border-t border-solid border-gray-400">
-      <Item icon="icontoday" title="Today" />
-      <Item icon="iconhuojian" title="Game" />
-      <Item icon="iconios-apps" title="App" />
-      <Item icon="icondownload" title="Update" />
-      <Item icon="iconsousuo" title="Search" />
-    </div>
-  );
+export const DesktopTabbar: React.FC<IProps> = ({ onChange, selectedIndex }) => {
+  return React.useMemo(() => {
+    const makeProp = (n: number) => ({
+      onClick: () => {
+        onChange(n);
+      },
+      isSelected: selectedIndex === n,
+    });
+
+    const itemsData = [
+      { icon: 'icontoday', title: 'Today', ...makeProp(0) },
+      { icon: 'iconhuojian', title: 'Game', ...makeProp(1) },
+      { icon: 'iconios-apps', title: 'App', ...makeProp(2) },
+      { icon: 'icondownload', title: 'Update', ...makeProp(3) },
+      { icon: 'iconsousuo', title: 'Search', ...makeProp(4) },
+    ];
+
+    return (
+      <div className="fixed left-0 bottom-0 z-10 flex flex-row items-center justify-around pb-bottom-safe bg-teal-100 w-vw border-t border-teal-200">
+        {itemsData.map((v) => {
+          return (
+            <Memo key={v.title} memo={[v.isSelected]}>
+              <Item {...v} />
+            </Memo>
+          );
+        })}
+      </div>
+    );
+  }, [selectedIndex]);
 };
