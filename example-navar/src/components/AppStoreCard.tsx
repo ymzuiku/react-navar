@@ -17,8 +17,8 @@ export const AppStoreCard: React.FC<IProps> = ({ dark, full, className, src, tit
     <div
       className={cssin(
         className,
-        'relative! dis=inline-black m=auto ease-out=all_0.3s scale=1 active:scale=0.97 h=--u96',
-        full ? 'w=100vw' : 'my=--u5 w=92vw r=--radius-xl box-shadow=--shadow-xl',
+        'relative! dis=inline-black m=auto ease-out=all_0.3s scale=1 active:scale=0.97 h=24rem',
+        full ? 'w=100vw' : 'my=--5 w=92vw r=--radius-xl box-shadow=--shadow-xl',
         dark ? 'color=--white' : 'color=--black',
       )}
       {...rest}>
@@ -29,12 +29,12 @@ export const AppStoreCard: React.FC<IProps> = ({ dark, full, className, src, tit
           !full && 'r=--radius-xl',
         )}
       />
-      <div className={cssin`absolute! p=--u4 mt=--u2 left! top! z=1`}>
+      <div className={cssin`absolute! p=--4 mt=--2 left! top! z=1`}>
         {full && <div className={cssin`h=--top-safe`} />}
         {info && <p className={cssin`font=--font-sm opacity=0.7`}>{info}</p>}
         <h3 className={cssin`font=--font-2xl color=--font-500`}>{title}</h3>
       </div>
-      {footer && <p className={cssin`absolute! z=1 p=--u4 left! bottom! font=--font-sm opacity=0.7`}>{footer}</p>}
+      {footer && <p className={cssin`absolute! z=1 p=--4 left! bottom! font=--font-sm opacity=0.7`}>{footer}</p>}
     </div>
   );
 };

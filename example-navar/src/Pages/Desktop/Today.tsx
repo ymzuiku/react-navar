@@ -43,12 +43,12 @@ export const Today: React.FC<IProps> = () => {
 
   return (
     <div onScroll={handleOnScroll} className={cssin('overflow=auto w=100% h=100vh')}>
-      <div className={cssin('h=--u24')} />
-      <div className={cssin('h=--u4')} />
+      <div className={cssin('h=--24')} />
+      <div className={cssin('h=--4')} />
       {todayData.map((v, i) => {
         return <AppStoreCard key={i} {...v} />;
       })}
-      <div className={cssin('h=--u32')} />
+      <div className={cssin('h=--32')} />
     </div>
   );
 };

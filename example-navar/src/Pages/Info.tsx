@@ -19,13 +19,13 @@ export const Info: React.FC<IProps> = ({}) => {
               <div className={cssin`dis=block absolute! top! right!`} onClick={navarManager.pop}>
                 <div className={cssin`h=--top-safe`} />
                 <Icon
-                  className={cssin`opacity=0.7 w=--u8 h=--u8 m=--u4 ${params.dark ? 'color=--white' : 'color=--black'}`}
+                  className={cssin`opacity=0.7 w=--8 h=--8 m=--4 ${params.dark ? 'color=--white' : 'color=--black'}`}
                   link="iconclose2"
                 />
               </div>
             )}
-            {params && <p className={cssin`p=--u6`}>{params.text}</p>}
-            {params && <p className={cssin`p=--u6`}>{params.text}</p>}
+            {params && <p className={cssin`p=--6`}>{params.text}</p>}
+            {params && <p className={cssin`p=--6`}>{params.text}</p>}
           </Navar>
         );
       }}

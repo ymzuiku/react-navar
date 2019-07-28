@@ -17,12 +17,12 @@ interface IItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDi
 
 const Item: React.FC<IItemProps> = ({ icon, title, onClick, isSelected }) => {
   return (
-    <div onClick={onClick} className={cssin`h=--u14 my=--u1 col! items=center justify=center`}>
+    <div onClick={onClick} className={cssin`h=--14 my=--1 col! items=center justify=center`}>
       <Icon
-        className={cssin('ease-out=all_0.3s w=--u7 h=--u7', isSelected ? 'color=--teal-900' : 'color=--teal-500')}
+        className={cssin('ease-out=all_0.3s w=--7 h=--7', isSelected ? 'color=--teal-900' : 'color=--teal-500')}
         link={icon}
       />
-      <p className={cssin`font=--font-xxs mt=--u1 ${isSelected ? 'color=--teal-900' : 'color=--teal-500'}`}>{title}</p>
+      <p className={cssin`font=--font-xxs mt=--1 ${isSelected ? 'color=--teal-900' : 'color=--teal-500'}`}>{title}</p>
     </div>
   );
 };
