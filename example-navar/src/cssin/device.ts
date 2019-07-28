@@ -1,4 +1,4 @@
-// import { cssin } from 'cssin';
+import { appendCss } from '../cssin';
 
 const ua = navigator.userAgent;
 export const isAndroid = /(?:Android)/.test(ua);
@@ -47,12 +47,6 @@ export const topSafe = isNative ? (isNeedIPhoneSafe ? 43 : 20) : 0;
 
 export const bottomSafe = isNative ? (isNeedIPhoneSafe ? 25 : 0) : 0;
 
-// document.body.style.width = '100%';
-// document.body.style.minHeight = '100vh';
-// document.body.style.backgroundColor = '#fff';
-// document.body.style.margin = '0px';
-// document.body.style.padding = '0px';
-// document.body.style.position = 'relative';
 document.body.style.setProperty('--top-safe', `${topSafe}px`);
 document.body.style.setProperty('--bottom-safe', `${bottomSafe}px`);
 
@@ -64,41 +58,36 @@ if (rootEle) {
   // rootEle.style.position = 'relative';
 }
 
-// cssin(`
-// body {
-//   padding: 0px;
-//   margin: 0px;
-//   position: relative;
-//   -webkit-tap-highlight-color: transparent;
-//   font-size: 16px;
-//   height: 100%;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-// }
+appendCss(`
+body {
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 16px;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
 
-// input {
-//   background-color: #f3f3f3;
-//   outline: none;
-//   border: none;
-//   padding: 0px;
-//   margin: 0px;
-//   -webkit-appearance: none;
-// }
+input {
+  background-color: #f3f3f3;
+  outline: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  -webkit-appearance: none;
+}
 
-// div, button {
-//   user-select: none;
-// }
+div, button {
+  user-select: none;
+}
 
-// button {
-//   -webkit-appearance: none;
-//   outline: none;
-//   border: none;
-//   user-select: none;
-// }
-// `);
-
-// 阻止双指放大
-document.addEventListener('gesturestart', (event) => {
-  event.preventDefault();
-});
+button {
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  user-select: none;
+}
+`);

@@ -1,4 +1,14 @@
-import { isPc } from './device';
+const ua = navigator.userAgent;
+export const isAndroid = /(?:Android)/.test(ua);
+// const isAndroid = true;
+export const isFireFox = /(?:Firefox)/.test(ua);
+export const isChrome = /(?:Chrome|CriOS)/.test(ua);
+export const isTablet =
+  /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua));
+export const isPhone = /(?:iPhone)/.test(ua) && !isTablet;
+export const isWechat = /MicroMessenger/.test(ua);
+export const isPc = !isPhone && !isAndroid;
+export const isLow = false;
 
 type IEvent = (event: any) => any;
 

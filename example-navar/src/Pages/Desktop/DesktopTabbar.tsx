@@ -17,9 +17,12 @@ interface IItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDi
 
 const Item: React.FC<IItemProps> = ({ icon, title, onClick, isSelected }) => {
   return (
-    <div onClick={onClick} className="h-14 my-1 flex-col flex items-center justify-center">
-      <Icon className={`ease-out-3 w-7 h-7 ${isSelected ? 'text-teal-900' : 'text-teal-500'}`} link={icon} />
-      <p className={`text-xxs mt-1 ${isSelected ? 'text-teal-900' : 'text-teal-500'}`}>{title}</p>
+    <div onClick={onClick} className={cssin`h=--u14 my=--u1 col! items=center justify=center`}>
+      <Icon
+        className={cssin('ease-out=all_0.3s w=--u7 h=--u7', isSelected ? 'color=--teal-900' : 'color=--teal-500')}
+        link={icon}
+      />
+      <p className={cssin`font=--font-xxs mt=--u1 ${isSelected ? 'color=--teal-900' : 'color=--teal-500'}`}>{title}</p>
     </div>
   );
 };
@@ -43,12 +46,8 @@ export const DesktopTabbar: React.FC<IProps> = ({ onChange, selectedIndex }) => 
 
     return (
       <div
-        // className="fixed left-0 bottom-0 z-10 flex flex-row items-center justify-around pb-bottom-safe bg-teal-100 w-vw border-t border-teal-200"
-        // className={css(`.desktopTabbar:hover {
-        //   background-color: #f00 !important;
-        // }`)}
         className={cssin(
-          'fixed. left. bottom. z=20 row. items=center justify=around pb=--bottom-safe w=100vw border-t=1px bg3=--teal-100 background-color=--teal-100  border-color=--teal-200',
+          'fixed! left! bottom! row! z=20 items=center justify=around pb=--bottom-safe w=100vw border-t=1px bg3=--teal-100 background-color=--teal-100  border-color=--teal-200',
         )}>
         {itemsData.map((v) => {
           return (

@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import * as React from 'react';
 
 import { BlodTitle } from '../../components/BlodTitle';
-import { Memo } from '../../components/Memo';
-import { device, INavarFloatProps, scope } from '../../navar';
+import { cssin } from '../../cssin';
+import { INavarFloatProps } from '../../navar';
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   scrollRef: { current: any };
@@ -29,7 +29,7 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
 
   return (
     <div
-      className="flex fixed justify-between items-center flex-row px-4 left-0 top-0 z-50 w-vw pt-top-safe"
+      className={cssin`row! fixed! justify=between items=center px=--u4 left! top! z=50 w=100vw pt=--top-safe`}
       style={{
         pointerEvents: anime.x < 0 ? 'none' : undefined,
         transition: 'transform 0.15s ease-out',
@@ -40,13 +40,17 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
           transition: 'all 0.25s ease-out',
           transform: `translateX(${anime.x * 500}%)`,
         }}>
-        <div className="p-0 text-xs opacity-60">
+        <div className={cssin`p=0 font=--font-xs opacity=0.6`}>
           {dayStr}
-          <span className="ml-2">{dayWeek}</span>
+          <span className={cssin`ml=--u2`}>{dayWeek}</span>
         </div>
         <BlodTitle>Today</BlodTitle>
       </div>
-      <img className="w-10 rounded-full h-10" src={avatarUrl} style={{ opacity: anime.x >= 0 ? 1 : 0 }} />
+      <img
+        className={cssin`w=--u10 mr=--u10 r=999px h=--u10`}
+        src={avatarUrl}
+        style={{ opacity: anime.x >= 0 ? 1 : 0 }}
+      />
     </div>
   );
 };

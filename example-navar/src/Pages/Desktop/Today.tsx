@@ -4,6 +4,7 @@ import * as React from 'react';
 import { AppStoreCard } from '../../components/AppStoreCard';
 import { Cell } from '../../components/Cell';
 import { Memo } from '../../components/Memo';
+import { cssin } from '../../cssin';
 import { useEvent } from '../../hooks';
 
 import { todayData } from './todayData';
@@ -41,14 +42,13 @@ export const Today: React.FC<IProps> = () => {
   }, []);
 
   return (
-    <div onScroll={handleOnScroll} className="overflow-auto w-full h-vh">
-      {/* <div className="h-top-safe fixed top-0 left-0 bg-gray-400 z-100" /> */}
-      <div className="h-24" />
-      <div className="h-4" />
+    <div onScroll={handleOnScroll} className={cssin('overflow=auto w=100% h=100vh')}>
+      <div className={cssin('h=--u24')} />
+      <div className={cssin('h=--u4')} />
       {todayData.map((v, i) => {
         return <AppStoreCard key={i} {...v} />;
       })}
-      <div className="h-32" />
+      <div className={cssin('h=--u32')} />
     </div>
   );
 };

@@ -18,14 +18,6 @@ export interface IScroll {
   top: number;
 }
 
-export interface ILayout {
-  bottomHeight: number;
-  bottomSafe: number;
-  topHeight: number;
-  topSafe: number;
-  zIndex: number;
-}
-
 export interface ICssvar {
   '--navar-background-color'?: string;
   '--navar-mask-color'?: string;

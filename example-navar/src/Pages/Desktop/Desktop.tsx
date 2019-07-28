@@ -29,7 +29,7 @@ export const Hello: React.FC<IProps> = () => {
   );
 
   return (
-    <Navar layout={{ topSafe: 0 }} path="Desktop" renderFloat={Float}>
+    <Navar path="Desktop" renderFloat={Float}>
       <MemoDisplay isShow={selectedIndex === 0}>
         <Today />
       </MemoDisplay>
