@@ -61,6 +61,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       // 阻止双指放大
       if (event.touches && event.touches.length > 1) {
         event.preventDefault();
+        event.stopPropagation();
       }
 
       if (navarManager.state.historys.length === 1) {
@@ -83,6 +84,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       // 阻止双指放大
       if (event.changedTouches && event.changedTouches.length > 1) {
         event.preventDefault();
+        event.stopPropagation();
       }
 
       if (!touchData.touchStarting) {
@@ -152,6 +154,9 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       lastTouchEndTime = nowTime;
 
       if (!touchData.touchStarting && !touchData.touchMoving) {
+        // TODO: 有空检测这里需不需要
+        // initTouchData();
+
         return;
       }
 

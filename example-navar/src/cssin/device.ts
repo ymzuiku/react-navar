@@ -58,6 +58,11 @@ if (rootEle) {
   // rootEle.style.position = 'relative';
 }
 
+// 阻止双指放大
+document.addEventListener('gesturestart', (event) => {
+  event.preventDefault();
+});
+
 appendCss(`
 body {
   padding: 0px;
@@ -80,7 +85,7 @@ input {
   -webkit-appearance: none;
 }
 
-div, button {
+div, button, {
   user-select: none;
 }
 

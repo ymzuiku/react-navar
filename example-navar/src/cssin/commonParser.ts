@@ -74,10 +74,10 @@ export const commonParser = [
   { 'bg=': (v: any) => `{ background: ${v}; }` },
   { 'bgc=': (v: any) => `{ background-color: ${v}; }` },
   // anime
-  { 'ease-out=': (v: any) => `{ transtion: ${v} ease-out; }` },
-  { 'ease-in=': (v: any) => `{ transtion: ${v} ease-in; }` },
+  { 'ease-out=': (v: any) => `{ transition: ${v} ease-out; }` },
+  { 'ease-in=': (v: any) => `{ transition: ${v} ease-in; }` },
   { 'ease-in-out=': (v: any) => `{ transtion: ${v} ease-in-out; }` },
-  { 'scale=': (v: any) => `{ transfrom: scale(${v}, ${v}}; }` },
+  { 'scale=': (v: any) => `{ transform: scale(${v}, ${v})}; }` },
   {
     'center!': (v: any) => `{
       display: flex;

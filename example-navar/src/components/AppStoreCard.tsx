@@ -31,10 +31,10 @@ export const AppStoreCard: React.FC<IProps> = ({ dark, full, className, src, tit
       />
       <div className={cssin`absolute! p=--4 mt=--2 left! top! z=1`}>
         {full && <div className={cssin`h=--top-safe`} />}
-        {info && <p className={cssin`font=--font-sm opacity=0.7`}>{info}</p>}
+        {info && <div className={cssin`font=--font-sm opacity=0.7`}>{info}</div>}
         <h3 className={cssin`font=--font-2xl color=--font-500`}>{title}</h3>
       </div>
-      {footer && <p className={cssin`absolute! z=1 p=--4 left! bottom! font=--font-sm opacity=0.7`}>{footer}</p>}
+      {footer && <div className={cssin`absolute! z=1 p=--4 left! bottom! font=--font-sm opacity=0.7`}>{footer}</div>}
     </div>
   );
 };
