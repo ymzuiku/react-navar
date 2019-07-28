@@ -1,9 +1,11 @@
 import mem from 'mem';
 
 export const appendCss = mem((str: string) => {
-  const styleElement = document.createElement('style');
-  styleElement.innerHTML = str;
-  document.head.appendChild(styleElement);
+  const ele = document.createElement('style');
+  ele.innerHTML = str;
+  // tslint:disable-next-line
+  ele.type = 'text/css';
+  document.head.appendChild(ele);
 
   // 暂时只匹配一个class
   const regex = /\.[^{^:]*/;

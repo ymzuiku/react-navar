@@ -22,11 +22,8 @@
     "typescript": "3.5.3"
   },
   "scripts": {
-    "watch:css": "postcss tailwind.config.css -o src/tailwind.auto.css -w",
-    "start:css": "postcss tailwind.config.css -o src/tailwind.auto.css",
-    "build:css": "NODE_ENV=production postcss tailwind.config.css -o src/tailwind.auto.css",
     "start": "react-scripts start",
-    "build": "npm run build:css && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lib": "tscu example/src/navar --outDir lib",
@@ -65,11 +62,9 @@
   "devDependencies": {
     "@capacitor/cli": "^1.1.1",
     "@capacitor/core": "^1.1.1",
-    "@fullhuman/postcss-purgecss": "^1.2.0",
     "http-proxy-middleware": "^0.19.1",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
-    "tailwindcss": "^1.0.5",
     "tscu": "^0.0.1",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
