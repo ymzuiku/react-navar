@@ -17,7 +17,7 @@ interface IManager {
   setState(s: IState): any;
 }
 
-const ANIMETIME = 250;
+const ANIMETIME = 300;
 const SINKRATE = 0.3;
 const MOVETHRESHOLD = 0.15;
 const STARTAREA = 0.48;
