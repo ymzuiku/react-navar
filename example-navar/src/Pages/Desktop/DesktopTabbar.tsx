@@ -2,8 +2,7 @@ import * as React from 'react';
 
 import { Icon } from '../../components/Icon';
 import { Memo } from '../../components/Memo';
-import { TabBar } from '../../components/TabBar';
-import { useEvent } from '../../hooks';
+import { cssin } from '../../cssin';
 
 interface IProps {
   selectedIndex: number;
@@ -43,7 +42,14 @@ export const DesktopTabbar: React.FC<IProps> = ({ onChange, selectedIndex }) => 
     ];
 
     return (
-      <div className="fixed left-0 bottom-0 z-10 flex flex-row items-center justify-around pb-bottom-safe bg-teal-100 w-vw border-t border-teal-200">
+      <div
+        // className="fixed left-0 bottom-0 z-10 flex flex-row items-center justify-around pb-bottom-safe bg-teal-100 w-vw border-t border-teal-200"
+        // className={css(`.desktopTabbar:hover {
+        //   background-color: #f00 !important;
+        // }`)}
+        className={cssin(
+          'fixed. left. bottom. z=20 row. items=center justify=around pb=--bottom-safe w=100vw border-t=1px bg3=--teal-100 background-color=--teal-100  border-color=--teal-200',
+        )}>
         {itemsData.map((v) => {
           return (
             <Memo key={v.title} memo={[v.isSelected]}>
