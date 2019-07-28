@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { setMatchs, setValues } from './cssin';
-import { commonMatchs } from './cssin/commonMatchs';
+import { setParsers, setValues } from './cssin';
+import { commonParser } from './cssin/commonParser';
 import { commonValues } from './cssin/commonValues';
 import './cssin/device';
 import './index.css';
@@ -10,7 +10,7 @@ import { NavarController } from './navar';
 import * as Pages from './Pages';
 // import './tailwind.auto.css';
 
-setMatchs(commonMatchs);
+setParsers(commonParser);
 setValues(commonValues);
 
 // const camelCase = (key: string) => key.replace(/(\-[a-z])/g, (v) => v.toUpperCase().replace('-', ''));

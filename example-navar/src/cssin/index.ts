@@ -22,14 +22,15 @@ export const setValues = (obj: any) => {
 
 let allParasers: any = {};
 
-export const setMatchs = (lists: any) => {
-  const obj: any = {};
-  lists.forEach((list: [any, any]) => {
-    const [k, fn] = list;
+export const setParsers = (objs: any) => {
+  const parser: any = {};
+  objs.forEach((par: any) => {
+    const key = Object.keys(par)[0];
+    const fn = par[key];
 
-    obj[k] = mem(
+    parser[key] = mem(
       (param: string): React.CSSProperties => {
-        let v: string = param.replace(k, '') as any;
+        let v: string = param.replace(key, '') as any;
         if (v.indexOf('--') === 0) {
           v = `var(${v})`;
         }
@@ -39,17 +40,13 @@ export const setMatchs = (lists: any) => {
       },
     );
   });
-  allParasers = { ...allParasers, ...obj };
+  allParasers = { ...allParasers, ...parser };
 
-  return obj;
+  return parser;
 };
 
-let cssUseTime = 0;
 export const cssin = mem(
   (...args: any[]): string => {
-    // 用来记录cssin的总耗时
-    const startOnceTime = Date.now();
-
     const param = args.join(' ');
 
     let style = '';
@@ -73,7 +70,6 @@ export const cssin = mem(
       if (value) {
         // 包含等号的token 如 bg=#f00
         const fn = allParasers[`${key}=`];
-        console.log(key, value, fn, allParasers);
         if (fn) {
           const cssString = `.${name}${pre} ${fn(value)}`;
           style += appendCss(cssString);
@@ -97,10 +93,6 @@ export const cssin = mem(
         }
       }
     });
-
-    cssUseTime += Date.now() - startOnceTime;
-
-    console.log('cssUseTime 一共消耗了(ms):', cssUseTime);
 
     return style;
   },
