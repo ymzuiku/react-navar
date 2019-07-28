@@ -5,5 +5,6 @@ export * from './NavarController';
 export * from './navarManager';
 export * from './utils';
 export * from './hooks';
+export * from './navar.interface';
 
 export { device };

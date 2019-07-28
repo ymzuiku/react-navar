@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { BlodTitle } from '../../components/BlodTitle';
 import { Memo } from '../../components/Memo';
-import { device, INavarFloatProps, scope } from '../../lib';
+import { device, INavarFloatProps, scope } from '../../navar';
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   scrollRef: { current: any };
@@ -31,19 +31,22 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
     <div
       className="flex fixed justify-between items-center flex-row px-4 left-0 top-0 z-50 w-vw pt-top-safe"
       style={{
-        transition: 'transform 0.15s ease-out, opacity 0.1s ease-out',
-        opacity: anime.x === 0 ? 1 : 0,
-        transform: `translate(${anime.x * 100}%, ${moveY + 10}px)`,
+        pointerEvents: anime.x < 0 ? 'none' : undefined,
+        transition: 'transform 0.15s ease-out',
+        transform: `translateY(${moveY + 10}px)`,
       }}>
-      <div>
+      <div
+        style={{
+          transition: 'all 0.25s ease-out',
+          transform: `translateX(${anime.x * 500}%)`,
+        }}>
         <div className="p-0 text-xs opacity-60">
           {dayStr}
-          {anime.x}
           <span className="ml-2">{dayWeek}</span>
         </div>
         <BlodTitle>Today</BlodTitle>
       </div>
-      <img className="w-10 rounded-full h-10" src={avatarUrl} />
+      <img className="w-10 rounded-full h-10" src={avatarUrl} style={{ opacity: anime.x >= 0 ? 1 : 0 }} />
     </div>
   );
 };

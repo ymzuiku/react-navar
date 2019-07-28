@@ -8712,10 +8712,10 @@ react-app-polyfill@^1.0.1:
     regenerator-runtime "0.13.2"
     whatwg-fetch "3.0.0"
 
-react-consumer@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-consumer/-/react-consumer-1.0.7.tgz#bab503e0a360e3b8ee0a71ce0e7241809bb45e18"
-  integrity sha512-ip7SqfysbDpwcgXOH03Oq6wgDBVwS25oEkYXh2sJnsQuIFeNmxVvo4tfw3TenHznhd9aDre/ckcLuOVBMqaf5A==
+react-consumer@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-consumer/-/react-consumer-1.0.8.tgz#1e7ba98ffcbfeae0b56de96a974f5cc6141a1bf7"
+  integrity sha512-F4kGoVVNhPa4UprDvBMaGPNmQ/H7p8vDFyWoUN12SMVig5/BP7rGZaJOX4HtKqGzoindGu8auZDL71h1ngbaRQ==
   dependencies:
     immer "^3.1.3"
 

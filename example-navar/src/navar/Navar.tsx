@@ -24,7 +24,7 @@ export interface INavarFloatProps {
   onScroll(event: any): any;
 }
 
-interface INavarProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface INavarProps {
   layout?: ILayoutParams;
   nowPath?: string;
   path: string;
@@ -38,7 +38,7 @@ interface IRenderProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTML
 }
 
 document.body.style.setProperty('--navar-background-color', '#fff');
-document.body.style.setProperty('--navar-mask-color', 'rgba(0,5,15,0.23)');
+document.body.style.setProperty('--navar-mask-color', 'rgba(0,5,15,0.3)');
 
 const Render: React.FC<IRenderProps> = ({ history, children, layout, renderFloat, style, ...rest }) => {
   const [anime, setAnime] = React.useState<IPosAnime>({

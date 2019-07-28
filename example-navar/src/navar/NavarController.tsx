@@ -59,7 +59,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
 
     const touchStart = (event: any) => {
       // 阻止双指放大
-      if (event.touches.length > 1) {
+      if (event.touches && event.touches.length > 1) {
         event.preventDefault();
       }
 
@@ -81,7 +81,7 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
 
     const touchMove = (event: any) => {
       // 阻止双指放大
-      if (event.changedTouches.length > 1) {
+      if (event.changedTouches && event.changedTouches.length > 1) {
         event.preventDefault();
       }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { NavarController } from './lib';
+import { NavarController } from './navar';
 import * as Pages from './Pages';
 import './tailwind.auto.css';
 

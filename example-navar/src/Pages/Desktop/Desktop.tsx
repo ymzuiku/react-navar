@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { MemoDisplay } from '../../components/Memo';
-import { Navar } from '../../lib';
+import { Navar } from '../../navar';
 
 import { App } from './App';
 import { DesktopTabbar } from './DesktopTabbar';

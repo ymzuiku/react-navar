@@ -32,9 +32,7 @@ const changeStatusBarDart = (isDart: boolean) => {
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 export const Today: React.FC<IProps> = () => {
-  const [handleEvent, eventRef] = useEvent();
   const handleOnScroll = React.useCallback((e: any) => {
-    handleEvent(e.target);
     if (e.target.scrollTop > 160) {
       changeStatusBarDart(false);
     } else {

@@ -16,23 +16,24 @@ export const Icon: React.FC<IIcon> = ({
   dotBorder = '1px solid #fff',
   font,
   link,
+  style,
   className = '',
   ...props
 }) => {
   let icon = null;
 
   if (font) {
-    icon = <i className={`iconfont ${font} ${className}`} {...props} />;
+    icon = <i className={`iconfont ${font} ${className}`} style={style} {...props} />;
   } else if (link) {
     icon = (
-      <svg className={`icon ${className}`} aria-hidden="true" {...props as any}>
+      <svg className={`icon ${className}`} aria-hidden="true" style={style} {...props as any}>
         <use xlinkHref={`#${link}`} />
       </svg>
     );
   }
   if (dot) {
     return (
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', ...style }} {...props}>
         {icon}
         <div
           style={{

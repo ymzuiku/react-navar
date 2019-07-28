@@ -125,6 +125,10 @@ export const navarManager: IManager = {
     }, navarManager.animeTime);
   }) as any,
   push: (path, option) => {
+    if (isLock) {
+      return;
+    }
+    isLock = true;
     navarManager.state.historys.push({
       path,
       option,
@@ -160,6 +164,7 @@ export const navarManager: IManager = {
     });
 
     setTimeout(() => {
+      isLock = false;
       const lastCount = navarManager.state.historys.length - 1;
       const his = navarManager.state.historys[lastCount];
       navarManager.state.historys[lastCount] = {
