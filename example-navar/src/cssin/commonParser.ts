@@ -82,7 +82,7 @@ export const commonParser = [
     'center!': (v: any) => `{
       display: flex;
       flex-direction: column;
-      justify-content: flex-center;
+      justify-content: center;
       align-items: center;
     }`,
   },
