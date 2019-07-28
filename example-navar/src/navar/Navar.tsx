@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { IHistory, IPosAnime, IScroll } from './navar.interface';
 import { navarManager } from './navarManager';
+import { isLow } from './utils';
 
 export interface IChildProps {
   scroll: IScroll;
@@ -105,7 +106,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, zIndex, renderFloat
           overflow: anime.gesturing ? 'hidden' : 'auto',
           pointerEvents: anime.gesturing && anime.x !== 0 ? 'none' : undefined,
           WebkitOverflowScrolling: 'touch',
-          // boxShadow: `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.2})`,
+          boxShadow: isLow ? undefined : `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.35})`,
           zIndex,
           position: 'fixed',
           left: isStatic ? anime.x : 0,

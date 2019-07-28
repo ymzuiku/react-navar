@@ -8,7 +8,7 @@ export const isTablet =
 export const isPhone = /(?:iPhone)/.test(ua) && !isTablet;
 export const isWechat = /MicroMessenger/.test(ua);
 export const isPc = !isPhone && !isAndroid;
-export const isLow = false;
+export const isLow = isAndroid;
 
 type IEvent = (event: any) => any;
 
