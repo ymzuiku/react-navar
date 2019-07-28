@@ -1,34 +1,10 @@
-import { Plugins, StatusBarStyle } from '@capacitor/core';
 import * as React from 'react';
 
 import { AppStoreCard } from '../../components/AppStoreCard';
-import { Cell } from '../../components/Cell';
-import { Memo } from '../../components/Memo';
 import { cssin } from '../../cssin';
-import { useEvent } from '../../hooks';
+import { changeStatusBarDart } from '../../utils/changeStatusBar';
 
 import { todayData } from './todayData';
-
-const { StatusBar } = Plugins;
-
-let statusBarIsLight = false;
-
-if (StatusBar && StatusBar.setStyle) {
-  StatusBar.setStyle({
-    style: StatusBarStyle.Light,
-  });
-}
-
-const changeStatusBarDart = (isDart: boolean) => {
-  if (statusBarIsLight !== isDart) {
-    statusBarIsLight = isDart;
-    if (StatusBar && StatusBar.setStyle) {
-      StatusBar.setStyle({
-        style: isDart ? StatusBarStyle.Light : StatusBarStyle.Dark,
-      });
-    }
-  }
-};
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
