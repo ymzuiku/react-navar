@@ -1,4 +1,14 @@
-import { isPc } from './device';
+const ua = navigator.userAgent;
+export const isAndroid = /(?:Android)/.test(ua);
+// const isAndroid = true;
+export const isFireFox = /(?:Firefox)/.test(ua);
+export const isChrome = /(?:Chrome|CriOS)/.test(ua);
+export const isTablet =
+  /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua));
+export const isPhone = /(?:iPhone)/.test(ua) && !isTablet;
+export const isWechat = /MicroMessenger/.test(ua);
+export const isPc = !isPhone && !isAndroid;
+export const isLow = isAndroid;
 
 type IEvent = (event: any) => any;
 
@@ -68,3 +78,23 @@ export const scope = (v: number, a: number, b: number) => {
 
   return v;
 };
+
+// const defCharts = [
+//   'abcdefghijklmnopqrstuvwxyz',
+//   'abcdefghijklmnopqrstuvwxyz0123456789',
+//   'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+// ];
+
+// export const randomString = (length = 12, type = 0) => {
+//   length = length || 32;
+//   //设置随机数范围
+//   const charts = defCharts[type];
+//   const maxPos = charts.length;
+//   let result = '';
+//   for (let i = 0; i < length - 1; i++) {
+//     //产生随机数方式
+//     result += charts.charAt(Math.floor(Math.random() * maxPos));
+//   }
+
+//   return result;
+// };

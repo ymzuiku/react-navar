@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import * as React from 'react';
 
 import { IState } from './navar.interface';
@@ -54,7 +56,14 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       touchData.endY = 0;
       touchData.startTime = 0;
     };
+
     const touchStart = (event: any) => {
+      // 阻止双指放大
+      if (event.touches && event.touches.length > 1) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
       if (navarManager.state.historys.length === 1) {
         return;
       }
@@ -72,6 +81,12 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
     };
 
     const touchMove = (event: any) => {
+      // 阻止双指放大
+      if (event.changedTouches && event.changedTouches.length > 1) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
       if (!touchData.touchStarting) {
         initTouchData();
 
@@ -128,8 +143,20 @@ export const NavarController: React.FC<IProps> = ({ defaultPath, children }) => 
       }
     };
 
+    let lastTouchEndTime = 0;
+    // 阻止双击放大
+
     const touchEnd = (event: any) => {
+      const nowTime = new Date().getTime();
+      if (nowTime - lastTouchEndTime <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEndTime = nowTime;
+
       if (!touchData.touchStarting && !touchData.touchMoving) {
+        // TODO: 有空检测这里需不需要
+        // initTouchData();
+
         return;
       }
 
