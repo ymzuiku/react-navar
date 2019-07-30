@@ -76,9 +76,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, zIndex, renderFloat
     }
   }, []);
 
-  // const isStatic = !anime.instant && anime.gesturing && history.status === 'static';
   const isStatic = false;
-  // console.log(history.path, isStatic, history);
 
   return (
     <>
@@ -106,8 +104,7 @@ const Render: React.FC<IRenderProps> = ({ history, children, zIndex, renderFloat
           overflow: anime.gesturing ? 'hidden' : 'auto',
           pointerEvents: anime.gesturing && anime.x !== 0 ? 'none' : undefined,
           WebkitOverflowScrolling: 'touch',
-          // boxShadow: isLow ? undefined : `-4px 0px 13px rgba(0,10,20,${(1 - anime.x) * 0.35})`,
-          boxShadow: `-4px 0px 13px rgba(0,10,20, 0.25)`,
+          boxShadow: isLow ? undefined : `-4px 0px 13px rgba(0,10,20, 0.25)`,
           zIndex,
           position: 'fixed',
           left: isStatic ? anime.x : 0,

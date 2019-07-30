@@ -1,13 +1,10 @@
+import 'cssin/commonSheets';
+import 'cssin/commonValues';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './cssin/commonParser';
-import './cssin/commonValues';
-import './cssin/device';
-import './index.css';
 import { NavarController } from './navar';
 import * as Pages from './Pages';
-// import './tailwind.auto.css';
 
 // const camelCase = (key: string) => key.replace(/(\-[a-z])/g, (v) => v.toUpperCase().replace('-', ''));
 // const findClasses = /(\.)(?!\d)([^\s\.,{\[>+~#:)]*)(?![^{]*})/.source;

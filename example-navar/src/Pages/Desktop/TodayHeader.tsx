@@ -1,8 +1,8 @@
+import { cssin } from 'cssin';
 import dayjs from 'dayjs';
 import * as React from 'react';
 
 import { BlodTitle } from '../../components/BlodTitle';
-import { cssin } from '../../cssin';
 import { INavarFloatProps } from '../../navar';
 
 interface IProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -29,7 +29,7 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
 
   return (
     <div
-      className={cssin`row! fixed! justify=between items=center px=--4 left! top! z=50 w=100vw pt=--top-safe`}
+      className={cssin`row; fixed; justify:between; items:center; px:--4; left; top; z:50; w:100vw; pt:--top-safe;`}
       style={{
         pointerEvents: anime.x < 0 ? 'none' : undefined,
         transition: 'transform 0.15s ease-out',
@@ -40,13 +40,17 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
           transition: 'all 0.25s ease-out',
           transform: `translateX(${anime.x * 500}%)`,
         }}>
-        <div className={cssin`p=0 font=--font-xs opacity=0.6`}>
+        <div className={cssin`p:0; font:--font-xs; opacity:0.6;`}>
           {dayStr}
-          <span className={cssin`ml=--2`}>{dayWeek}</span>
+          <span className={cssin`ml:--2;`}>{dayWeek}</span>
         </div>
         <BlodTitle>Today</BlodTitle>
       </div>
-      <img className={cssin`w=--10 mr=--10 r=999px h=--10`} src={avatarUrl} style={{ opacity: anime.x >= 0 ? 1 : 0 }} />
+      <img
+        className={cssin`w:--10; mr:--10; radius:999px; h:--10;`}
+        src={avatarUrl}
+        style={{ opacity: anime.x >= 0 ? 1 : 0 }}
+      />
     </div>
   );
 };

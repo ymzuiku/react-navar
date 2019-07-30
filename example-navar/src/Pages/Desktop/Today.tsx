@@ -1,7 +1,7 @@
+import { cssin } from 'cssin';
 import * as React from 'react';
 
 import { AppStoreCard } from '../../components/AppStoreCard';
-import { cssin } from '../../cssin';
 import { changeStatusBarDart } from '../../utils/changeStatusBar';
 
 import { todayData } from './todayData';
@@ -18,13 +18,13 @@ export const Today: React.FC<IProps> = () => {
   }, []);
 
   return (
-    <div onScroll={handleOnScroll} className={cssin('overflow=auto w=100% h=100vh')}>
-      <div className={cssin('h=--24')} />
-      <div className={cssin('h=--4')} />
+    <div onScroll={handleOnScroll} className={cssin('overflow:auto; w:100%; h:100vh;')}>
+      <div className={cssin('h:--24;')} />
+      <div className={cssin('h:--4;')} />
       {todayData.map((v, i) => {
         return <AppStoreCard key={i} {...v} />;
       })}
-      <div className={cssin('h=--32')} />
+      <div className={cssin('h:--32:')} />
     </div>
   );
 };
