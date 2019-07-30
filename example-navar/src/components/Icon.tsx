@@ -1,3 +1,4 @@
+import { cssin } from 'cssin';
 import * as React from 'react';
 
 export interface IIcon extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -7,6 +8,7 @@ export interface IIcon extends React.DetailedHTMLProps<React.HTMLAttributes<HTML
   dotColor?: string;
   dotSize?: number;
   font?: string;
+  inlist?:string;
   link?: string;
 }
 export const Icon: React.FC<IIcon> = ({
@@ -16,6 +18,7 @@ export const Icon: React.FC<IIcon> = ({
   dotBorder = '1px solid #fff',
   font,
   link,
+  inlist,
   style,
   className = '',
   ...props
@@ -23,10 +26,10 @@ export const Icon: React.FC<IIcon> = ({
   let icon = null;
 
   if (font) {
-    icon = <i className={`iconfont ${font} ${className}`} style={style} {...props} />;
+    icon = <i className={`iconfont ${font} ${className} ${cssin(inlist)}`} style={style} {...props} />;
   } else if (link) {
     icon = (
-      <svg className={`icon ${className}`} aria-hidden="true" style={style} {...props as any}>
+      <svg className={`icon ${className} ${cssin(inlist)}`} aria-hidden="true" style={style} {...props as any}>
         <use xlinkHref={`#${link}`} />
       </svg>
     );

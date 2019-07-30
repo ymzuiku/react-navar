@@ -1,4 +1,3 @@
-import { cssin } from 'cssin';
 import dayjs from 'dayjs';
 import * as React from 'react';
 
@@ -29,7 +28,7 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
 
   return (
     <div
-      className={cssin`row; fixed; justify:between; items:center; px:--4; left; top; z:50; w:100vw; pt:--top-safe;`}
+      inlist="row; fixed; justify:between; items:center; px:--4; left; top; z:50; w:100vw; pt:--top-safe;"
       style={{
         pointerEvents: anime.x < 0 ? 'none' : undefined,
         transition: 'transform 0.15s ease-out',
@@ -40,14 +39,14 @@ export const TodayHeader: React.FC<INavarFloatProps> = ({ onScroll, anime }) => 
           transition: 'all 0.25s ease-out',
           transform: `translateX(${anime.x * 500}%)`,
         }}>
-        <div className={cssin`p:0; font:--font-xs; opacity:0.6;`}>
+        <div inlist="p:0; font:--font-xs; opacity:0.6;">
           {dayStr}
-          <span className={cssin`ml:--2;`}>{dayWeek}</span>
+          <span inlist="ml:--2;">{dayWeek}</span>
         </div>
         <BlodTitle>Today</BlodTitle>
       </div>
       <img
-        className={cssin`w:--10; mr:--10; radius:999px; h:--10;`}
+        inlist="w:--10; mr:--10; radius:999px; h:--10;"
         src={avatarUrl}
         style={{ opacity: anime.x >= 0 ? 1 : 0 }}
       />

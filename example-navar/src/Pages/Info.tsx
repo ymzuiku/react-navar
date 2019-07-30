@@ -1,4 +1,3 @@
-import { cssin } from 'cssin';
 import * as React from 'react';
 
 import { AppStoreCard } from '../components/AppStoreCard';
@@ -26,18 +25,18 @@ export const Info: React.FC<IProps> = ({}) => {
             <div onScroll={handleOnScroll}>
               {params && <AppStoreCard {...params} full={true} />}
               {params && (
-                <div className={cssin`dis:block; absolute; top; right;`} onClick={navarManager.pop}>
-                  <div className={cssin`h:--top-safe;`} />
+                <div inlist="cssin`dis:block; absolute; top; right;" onClick={navarManager.pop}>
+                  <div inlist="cssin`h:--top-safe;" />
                   <Icon
-                    className={cssin`opacity:0.7; w:--8; h:--8; m:--4; ${
+                    inlist={`opacity:0.7; w:--8; h:--8; m:--4; ${
                       params.dark ? 'color:--white;' : 'color:--black;'
                     }`}
                     link="iconclose2"
                   />
                 </div>
               )}
-              {params && <p className={cssin`p:--6;`}>{params.text}</p>}
-              {params && <p className={cssin`p:--6;`}>{params.text}</p>}
+              {params && <p inlist="p:--6;">{params.text}</p>}
+              {params && <p inlist="p:--6;">{params.text}</p>}
             </div>
           </Navar>
         );

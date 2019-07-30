@@ -1,4 +1,3 @@
-import { cssin } from 'cssin';
 import * as React from 'react';
 
 import { Icon } from '../../components/Icon';
@@ -17,12 +16,12 @@ interface IItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDi
 
 const Item: React.FC<IItemProps> = ({ icon, title, onClick, isSelected }) => {
   return (
-    <div onClick={onClick} className={cssin`h:--14; my:--1; col; items:center; justify:center;`}>
+    <div onClick={onClick} inlist="h:--14; my:--1; col; items:center; justify:center;">
       <Icon
-        className={cssin('ease-out:0.3s; w:--7; h:--7;', isSelected ? 'color:--teal-900;' : 'color:--teal-500;')}
+        inlist={`ease-out:0.3s; w:--7; h:--7; ${isSelected ? 'color:--teal-900;' : 'color:--teal-500;'}`}
         link={icon}
       />
-      <p className={cssin`font:--font-xxs; mt:--1; ${isSelected ? 'color:--teal-900;' : 'color:--teal-500;'}`}>
+      <p inlist={`font:--font-xxs; mt:--1; ${isSelected ? 'color:--teal-900;' : 'color:--teal-500;'}`}>
         {title}
       </p>
     </div>
@@ -48,9 +47,7 @@ export const DesktopTabbar: React.FC<IProps> = ({ onChange, selectedIndex }) => 
 
     return (
       <div
-        className={cssin(
-          'fixed; left; bottom; row; z:20; items:center; justify:around; pb:--bottom-safe; w:100vw; border-t:1px; bg3:--teal-100; background-color:--teal-100;  border-color:--teal-200;',
-        )}>
+        inlist="fixed; left; bottom; row; z:20; items:center; justify:around; pb:--bottom-safe; w:100vw; border-t:1px; bg3:--teal-100; background-color:--teal-100;  border-color:--teal-200;">
         {itemsData.map((v) => {
           return (
             <Memo key={v.title} memo={[v.isSelected]}>

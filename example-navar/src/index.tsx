@@ -1,3 +1,4 @@
+import { coverAttribute } from 'cssin';
 import 'cssin/commonSheets';
 import 'cssin/commonValues';
 import React from 'react';
@@ -25,5 +26,7 @@ const App: React.FC = () => {
     </NavarController>
   );
 };
+
+coverAttribute('inlist');
 
 ReactDOM.render(<App />, document.getElementById('root'));
