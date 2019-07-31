@@ -3078,10 +3078,10 @@ cssesc@^3.0.0:
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
-cssin@^1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/cssin/-/cssin-1.1.8.tgz#434a8bf13c692e0a8cb1672f06b3c41c39075961"
-  integrity sha512-U6S4VU/9lOwhDvi4CCQjPBAC99zAVMh7Io+CjqXXCWItnL4kQXUFanbgwowvWQap25XUXZ+W8YiRn1CKdShNvA==
+cssin@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/cssin/-/cssin-1.2.5.tgz#e1fcb7b400f257e83a4a50515f3b07d8154f3a13"
+  integrity sha512-CY073TnVKryZKF9oS9ieea1ucYBM7FSG0viAVUiHZLSFFMCNjzl4Rid4twc1VyrCDXgGheQPae4Rq29vukusEw==
 
 cssnano-preset-default@^4.0.7:
   version "4.0.7"
@@ -8513,10 +8513,10 @@ react-app-polyfill@^1.0.1:
     regenerator-runtime "0.13.2"
     whatwg-fetch "3.0.0"
 
-react-consumer@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/react-consumer/-/react-consumer-1.0.8.tgz#1e7ba98ffcbfeae0b56de96a974f5cc6141a1bf7"
-  integrity sha512-F4kGoVVNhPa4UprDvBMaGPNmQ/H7p8vDFyWoUN12SMVig5/BP7rGZaJOX4HtKqGzoindGu8auZDL71h1ngbaRQ==
+react-consumer@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-consumer/-/react-consumer-1.0.9.tgz#656e4e9baf20d7cb01b8e9af492f0b60a0f7f291"
+  integrity sha512-5eiB65fIFepVClui9pxC7X+G1pF8NirQHLjYNuJbZhFX/tl5Cau/QODljGHcU+kF07IKuA8vnGDztGXvPbfUhA==
   dependencies:
     immer "^3.1.3"
 

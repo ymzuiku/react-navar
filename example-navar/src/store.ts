@@ -1,18 +1,16 @@
-import { createStateManager } from 'react-consumer';
-
-import { IHistory } from './navar';
+import { createStateManager } from "react-consumer";
 
 const initStore = {
   info: {
     params: {
       dark: true,
-      info: '',
-      title: '',
-      footer: '',
-      src: '',
-      text: '',
-    },
-  },
+      info: "",
+      title: "",
+      footer: "",
+      src: "",
+      text: ""
+    }
+  }
 };
 
 const { Consumer, store } = createStateManager(initStore);

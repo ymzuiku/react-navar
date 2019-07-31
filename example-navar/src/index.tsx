@@ -1,11 +1,11 @@
-import { coverAttribute } from 'cssin';
-import 'cssin/commonSheets';
-import 'cssin/commonValues';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { coverAttribute } from "cssin";
+import "cssin/commonCSSValues";
+import "cssin/commonSheets";
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { NavarController } from './navar';
-import * as Pages from './Pages';
+import { NavarController } from "./navar";
+import * as Pages from "./Pages";
 
 // const camelCase = (key: string) => key.replace(/(\-[a-z])/g, (v) => v.toUpperCase().replace('-', ''));
 // const findClasses = /(\.)(?!\d)([^\s\.,{\[>+~#:)]*)(?![^{]*})/.source;
@@ -27,6 +27,6 @@ const App: React.FC = () => {
   );
 };
 
-coverAttribute('inlist');
+coverAttribute("inlist");
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
