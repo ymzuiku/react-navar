@@ -63,7 +63,7 @@ export const DesktopTabbar: React.FC<IProps> = ({
 
     return (
       <div
-        inlist={`fixed; left; bottom; row; z:20; items:center; justify:around; pb:--bottom-safe; w:100vw; bt:var(--line) solid var(--teal-200); pt:--2; background-color:--teal-100;`}
+        inlist={`fixed; left; bottom; row; z:20; items:center; justify:around; pb:--bottom-safe; w:100vw; bt:--line; bc:--teal-200; pt:--2; background-color:--teal-100;`}
       >
         {itemsData.map(v => {
           return (

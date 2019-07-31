@@ -3078,10 +3078,10 @@ cssesc@^3.0.0:
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
-cssin@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/cssin/-/cssin-1.2.5.tgz#e1fcb7b400f257e83a4a50515f3b07d8154f3a13"
-  integrity sha512-CY073TnVKryZKF9oS9ieea1ucYBM7FSG0viAVUiHZLSFFMCNjzl4Rid4twc1VyrCDXgGheQPae4Rq29vukusEw==
+cssin@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/cssin/-/cssin-1.2.8.tgz#b66e3ec539ce4f2ab7a321670f2d7ef957be1659"
+  integrity sha512-PY9AROw81mQIkpfu+GGOeu2qJAE2v9baBeSNGD1ofmIMJP38aQ8WlV31Oteg7/ZC81z2tOGOMPMbQhO48l6GOA==
 
 cssnano-preset-default@^4.0.7:
   version "4.0.7"

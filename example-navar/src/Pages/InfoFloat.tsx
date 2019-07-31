@@ -31,7 +31,7 @@ export const InfoFloat: React.FC<INavarFloatProps> = ({
       transform: translateY(${moveY}%); 
       z: ${zIndex + 1}; `}
     >
-      <div inlist="m:--2; p:--5; w:80%; bg:--gray-800; color:--gray-200; center; radius:--2; opacity:0.96;">
+      <div inlist="m:--2; mb:--bottom-safe; p:--5; w:80%; bg:--gray-800; color:--gray-200; center; radius:--2; opacity:0.96;">
         <div>触屏左滑，返回上一页</div>
       </div>
     </div>
