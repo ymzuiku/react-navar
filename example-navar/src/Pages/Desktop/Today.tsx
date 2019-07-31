@@ -22,7 +22,7 @@ export const Today: React.FC<IProps> = () => {
 
   return (
     <div onScroll={handleOnScroll} inlist="overflow:auto; w:100%; h:100vh;">
-      <div inlist="h:--22;" />
+      <div inlist="h:--23;" />
       {todayData.map((v, i) => {
         return <AppStoreCard key={i} {...v} />;
       })}

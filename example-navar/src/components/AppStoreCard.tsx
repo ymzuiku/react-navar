@@ -28,10 +28,10 @@ export const AppStoreCard: React.FC<IProps> = ({
   return (
     <div
       inlist={[
-        "relative; dis:inline-black; m:auto; ease-out:0.3s; scale:1; active:scale:0.97; h:24rem;",
+        "relative; dis:inline-black; m:auto; ease-out:0.3s; h:24rem;",
         full
           ? "w:100vw;"
-          : "my:--5; w:92vw; radius:--radius-xl; box-shadow:--shadow-xl;",
+          : "scale:1; active:scale:0.97; my:--5; w:92vw; radius:--radius-xl; box-shadow:--shadow-xl;",
         dark ? "color:--white;" : "color:--black;"
       ].join(" ")}
       {...rest}

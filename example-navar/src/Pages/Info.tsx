@@ -6,6 +6,8 @@ import { INavarProps, Navar, navarManager } from "../navar";
 import { Consumer } from "../store";
 import { changeStatusBarDart } from "../utils/changeStatusBar";
 
+import { InfoFloat } from "./InfoFloat";
+
 interface IProps extends INavarProps {}
 
 export const Info: React.FC<IProps> = () => {
@@ -21,15 +23,15 @@ export const Info: React.FC<IProps> = () => {
     <Consumer memo={s => [s.info.params]}>
       {([params]: [any]) => {
         return (
-          <Navar path="Info">
+          <Navar path="Info" renderFloat={InfoFloat}>
             <div onScroll={handleOnScroll}>
               {params && <AppStoreCard {...params} full={true} />}
               {params && (
                 <div
-                  inlist="cssin`dis:block; absolute; top; right;"
+                  inlist="dis:block; absolute; top; right;"
                   onClick={navarManager.pop}
                 >
-                  <div inlist="cssin`h:--top-safe;" />
+                  <div inlist="h:--top-safe;" />
                   <Icon
                     inlist={`opacity:0.7; w:--8; h:--8; m:--4; ${
                       params.dark ? "color:--white;" : "color:--black;"
@@ -40,6 +42,7 @@ export const Info: React.FC<IProps> = () => {
               )}
               {params && <p inlist="p:--6;">{params.text}</p>}
               {params && <p inlist="p:--6;">{params.text}</p>}
+              <div inlist="h:--20;" />
             </div>
           </Navar>
         );
