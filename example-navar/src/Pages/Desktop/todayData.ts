@@ -176,3 +176,17 @@ todayData[4].onClick = () => {
     s.info.params = rest;
   });
 };
+todayData[5].onClick = () => {
+  navarManager.push('Info');
+  store.updateState((s) => {
+    const { onClick, ...rest } = todayData[5];
+    s.info.params = rest;
+  });
+};
+todayData[6].onClick = () => {
+  navarManager.push('Info');
+  store.updateState((s) => {
+    const { onClick, ...rest } = todayData[6];
+    s.info.params = rest;
+  });
+};
