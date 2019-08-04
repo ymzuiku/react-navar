@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import { ImgWorker } from './ImgWorker';
+import { ImgWorker } from 'react-img-worker';
 
 interface IProps
   extends React.DetailedHTMLProps<
