@@ -1,8 +1,7 @@
-import dayjs from 'dayjs';
 import * as React from 'react';
 
 import { INavarFloatProps } from '../navar';
-
+/* eslint react-hooks/exhaustive-deps: 0 */
 export const InfoFloat: React.FC<INavarFloatProps> = ({
   onScroll,
   anime,
