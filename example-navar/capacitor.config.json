@@ -3,7 +3,7 @@
   "appName": "navar",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "build",
+  "webDir": "public",
   "server": {
     "url": "http://navar.workos.top"
   }
