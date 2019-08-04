@@ -13,42 +13,41 @@ const webWorkerScript = `
   })
 `;
 
-interface IImageWorkerProps
+const createWorker = (script: string) => {
+  return new Worker(
+    URL.createObjectURL(new Blob([script], { type: 'application/javascript' }))
+  );
+};
+
+interface IImgWorkerProps
   extends React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
   > {
-  containerClass?: string;
-  imageClass?: string;
-  placeholder?: string | any;
-  // src: string;
+  boxProps?: React.DetailedHTMLProps<
+    React.ImgHTMLAttributes<HTMLImageElement>,
+    HTMLImageElement
+  >;
+  renderLoading?: any;
 }
 
-interface IImageWorkerState {
-  imgSrc: string;
+interface IImgWorkerState {
   isLoading: boolean;
+  src: string;
 }
-
-const wrappedComponent = (WrappedComponent: any) => (props: any) => {
-  return <WrappedComponent {...props} />;
-};
 
 export class ImgWorker extends React.Component<
-  IImageWorkerProps,
-  IImageWorkerState
+  IImgWorkerProps,
+  IImgWorkerState
 > {
   public image: HTMLImageElement = undefined as any;
 
   public state = {
     isLoading: true,
-    imgSrc: '',
+    src: '',
   };
-  public worker = new Worker(
-    URL.createObjectURL(
-      new Blob([webWorkerScript], { type: 'application/javascript' })
-    )
-  );
-  public constructor(props: IImageWorkerProps) {
+  public worker = createWorker(webWorkerScript);
+  public constructor(props: IImgWorkerProps) {
     super(props);
     this.worker.onmessage = (event: any) => {
       this.loadImage(event.data);
@@ -64,13 +63,12 @@ export class ImgWorker extends React.Component<
       this.image.onload = null;
       this.image.onerror = null;
     }
+
     this.worker.terminate();
   }
 
   public loadImage = (url: string) => {
     const image = new Image();
-    image.style.width = '100%';
-    image.style.height = '100%';
     this.image = image;
 
     image.src = url;
@@ -84,42 +82,22 @@ export class ImgWorker extends React.Component<
 
   public onLoad = () => {
     this.setState({
-      imgSrc: this.image.src,
+      src: this.image.src,
       isLoading: false,
     });
   };
 
   public render() {
-    const { style, imageClass, containerClass, ...rest } = this.props;
+    const { boxProps, renderLoading: Loading, src: _src, ...rest } = this.props;
+    const { isLoading, src } = this.state;
 
     return (
-      <div className={containerClass}>
-        {this.state.isLoading ? (
-          this.renderPlaceholder()
-        ) : (
-          <img
-            src={this.state.imgSrc}
-            style={{ ...style }}
-            className={imageClass}
-            alt="worker"
-            {...rest}
-          />
+      <>
+        {Loading && isLoading && (
+          <Loading key="img-worker-loading" isLoaing={isLoading} />
         )}
-      </div>
+        {!isLoading && <img key="img-worker" alt="" src={src} {...rest} />}
+      </>
     );
-  }
-
-  public renderPlaceholder() {
-    const { placeholder, style } = this.props;
-    if (typeof placeholder === 'function') {
-      const PlaceholderComponent = wrappedComponent(placeholder);
-
-      return <PlaceholderComponent />;
-    }
-    if (typeof placeholder === 'string') {
-      return <img src={placeholder} style={{ ...style }} alt="placeholder" />;
-    }
-
-    return null;
   }
 }
