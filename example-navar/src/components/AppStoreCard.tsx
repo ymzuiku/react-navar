@@ -1,4 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
+
+import { ImgWorker } from './ImgWorker';
 
 interface IProps
   extends React.DetailedHTMLProps<
@@ -28,19 +30,19 @@ export const AppStoreCard: React.FC<IProps> = ({
   return (
     <div
       inlist={[
-        "relative; dis:inline-black; m:auto; ease-out:0.3s; h:24rem;",
+        'relative; dis:inline-black; m:auto; ease-out:0.3s; h:24rem;',
         full
-          ? "w:100vw;"
-          : "scale:1; active:scale:0.97; my:--5; w:92vw; radius:--radius-xl; box-shadow:--shadow-xl;",
-        dark ? "color:--white;" : "color:--black;"
-      ].join(" ")}
+          ? 'w:100vw;'
+          : 'scale:1; active:scale:0.97; my:--5; w:92vw; radius:--radius-xl; box-shadow:--shadow-xl;',
+        dark ? 'color:--white;' : 'color:--black;',
+      ].join(' ')}
       {...rest}
     >
-      <img
+      <ImgWorker
         alt=""
         src={src}
         inlist={`pointer-events:none; absolute; overflow:hidden; object-fit:cover; h:100%; w:100%; left; top; z:0;
-        ${!full ? "radius:--radius-xl;" : ""}`}
+        ${!full ? 'radius:--radius-xl;' : ''}`}
       />
       <div inlist="absolute; p:--4; mt:--2; left; top; z:1;">
         {full && <div inlist="h:--top-safe;" />}

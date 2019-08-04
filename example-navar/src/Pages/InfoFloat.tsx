@@ -1,12 +1,12 @@
-import dayjs from "dayjs";
-import * as React from "react";
+import dayjs from 'dayjs';
+import * as React from 'react';
 
-import { INavarFloatProps } from "../navar";
+import { INavarFloatProps } from '../navar';
 
 export const InfoFloat: React.FC<INavarFloatProps> = ({
   onScroll,
   anime,
-  zIndex
+  zIndex,
 }) => {
   const [moveY, setMoveY] = React.useState(100);
   React.useEffect(() => {

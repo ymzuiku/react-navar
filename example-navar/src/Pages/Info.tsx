@@ -1,12 +1,12 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { AppStoreCard } from "../components/AppStoreCard";
-import { Icon } from "../components/Icon";
-import { INavarProps, Navar, navarManager } from "../navar";
-import { Consumer } from "../store";
-import { changeStatusBarDart } from "../utils/changeStatusBar";
+import { AppStoreCard } from '../components/AppStoreCard';
+import { Icon } from '../components/Icon';
+import { INavarProps, Navar, navarManager } from '../navar';
+import { Consumer } from '../store';
+import { changeStatusBarDart } from '../utils/changeStatusBar';
 
-import { InfoFloat } from "./InfoFloat";
+import { InfoFloat } from './InfoFloat';
 
 interface IProps extends INavarProps {}
 
@@ -34,7 +34,7 @@ export const Info: React.FC<IProps> = () => {
                   <div inlist="h:--top-safe;" />
                   <Icon
                     inlist={`opacity:0.7; w:--8; h:--8; m:--4; ${
-                      params.dark ? "color:--white;" : "color:--black;"
+                      params.dark ? 'color:--white;' : 'color:--black;'
                     }`}
                     link="iconclose2"
                   />
