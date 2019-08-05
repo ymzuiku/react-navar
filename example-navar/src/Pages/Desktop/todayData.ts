@@ -7,6 +7,8 @@ export const todayData = [
     info: '编辑最爱',
     title: '本周新游戏推荐',
     footer: '点击了解这一周值得关注的5款游戏',
+    minSrc:
+      'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2411713683,1350907591&fm=58&bpow=800&bpoh=533',
     src:
       'https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     text: `PlatinumGames 的传奇导演 Hideki Kamiya，携《生化危机》和《鬼泣》之余威，通过 SEGA 将全球有史以来最广受赞誉的动作角色游戏之一带到了 PC 平台。
@@ -27,7 +29,8 @@ export const todayData = [
     info: '指南',
     title: '为视频自动添加字幕',
     footer: '解锁隐藏技能系列',
-    src: 'https://images.pexels.com/photos/1548274/pexels-photo-1548274.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+    src:
+      'https://images.pexels.com/photos/1548274/pexels-photo-1548274.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
     text: `PlatinumGames 的传奇导演 Hideki Kamiya，携《生化危机》和《鬼泣》之余威，通过 SEGA 将全球有史以来最广受赞誉的动作角色游戏之一带到了 PC 平台。
 
     Bayonetta。古老魔女部族的最后一个幸存者，竭力在光明、黑暗与混乱间保持着平衡。为自保而长眠于地下—也是保护这个世界— Bayonetta 在 500 年后被世人发现并苏醒过来，在大洪水的激荡下，掀起了一场腥风血雨。
@@ -46,7 +49,8 @@ export const todayData = [
     info: '时下热门',
     title: '无比休闲的竞技之作',
     footer: '话题游戏《多多自走期》终于来啦',
-    src: 'https://images.pexels.com/photos/1755385/pexels-photo-1755385.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+    src:
+      'https://images.pexels.com/photos/1755385/pexels-photo-1755385.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
     text: `PlatinumGames 的传奇导演 Hideki Kamiya，携《生化危机》和《鬼泣》之余威，通过 SEGA 将全球有史以来最广受赞誉的动作角色游戏之一带到了 PC 平台。
 
     Bayonetta。古老魔女部族的最后一个幸存者，竭力在光明、黑暗与混乱间保持着平衡。为自保而长眠于地下—也是保护这个世界— Bayonetta 在 500 年后被世人发现并苏醒过来，在大洪水的激荡下，掀起了一场腥风血雨。
@@ -85,7 +89,8 @@ export const todayData = [
     info: '古建筑',
     title: '不到长城，非好汉',
     footer: '',
-    src: 'https://images.pexels.com/photos/19872/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    src:
+      'https://images.pexels.com/photos/19872/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     text: `PlatinumGames 的传奇导演 Hideki Kamiya，携《生化危机》和《鬼泣》之余威，通过 SEGA 将全球有史以来最广受赞誉的动作角色游戏之一带到了 PC 平台。
 
     Bayonetta。古老魔女部族的最后一个幸存者，竭力在光明、黑暗与混乱间保持着平衡。为自保而长眠于地下—也是保护这个世界— Bayonetta 在 500 年后被世人发现并苏醒过来，在大洪水的激荡下，掀起了一场腥风血雨。
@@ -104,7 +109,8 @@ export const todayData = [
     info: '重磅更新',
     title: '决战黄昏圣殿',
     footer: '《完美世界》新种族 "妖精" 登场',
-    src: 'https://images.pexels.com/photos/247878/pexels-photo-247878.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+    src:
+      'https://images.pexels.com/photos/247878/pexels-photo-247878.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
     text: `PlatinumGames 的传奇导演 Hideki Kamiya，携《生化危机》和《鬼泣》之余威，通过 SEGA 将全球有史以来最广受赞誉的动作角色游戏之一带到了 PC 平台。
 
     Bayonetta。古老魔女部族的最后一个幸存者，竭力在光明、黑暗与混乱间保持着平衡。为自保而长眠于地下—也是保护这个世界— Bayonetta 在 500 年后被世人发现并苏醒过来，在大洪水的激荡下，掀起了一场腥风血雨。
@@ -143,49 +149,49 @@ export const todayData = [
 
 todayData[0].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[0];
     s.info.params = rest;
   });
 };
 todayData[1].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[1];
     s.info.params = rest;
   });
 };
 todayData[2].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[2];
     s.info.params = rest;
   });
 };
 todayData[3].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[3];
     s.info.params = rest;
   });
 };
 todayData[4].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[4];
     s.info.params = rest;
   });
 };
 todayData[5].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[5];
     s.info.params = rest;
   });
 };
 todayData[6].onClick = () => {
   navarManager.push('Info');
-  store.updateState((s) => {
+  store.updateState(s => {
     const { onClick, ...rest } = todayData[6];
     s.info.params = rest;
   });

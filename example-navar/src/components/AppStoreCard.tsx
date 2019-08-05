@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ImgWorker } from 'react-img-worker';
+
+import { ImgWorker } from './ImgWorker';
 
 interface IProps
   extends React.DetailedHTMLProps<
@@ -11,6 +12,7 @@ interface IProps
   full?: boolean;
   info?: string;
   inlist?: string;
+  minSrc?: string;
   src?: string;
   text?: string;
   title: string;
@@ -20,6 +22,7 @@ export const AppStoreCard: React.FC<IProps> = ({
   dark,
   inlist,
   full,
+  minSrc,
   src,
   title,
   info,
@@ -39,6 +42,8 @@ export const AppStoreCard: React.FC<IProps> = ({
       {...rest}
     >
       <ImgWorker
+        miniSrc={minSrc}
+        worker={true}
         src={src}
         inlist={`pointer-events:none; absolute; overflow:hidden; object-fit:cover; h:100%; w:100%; left; top; z:0;
         ${!full ? 'radius:--radius-xl;' : ''}`}
