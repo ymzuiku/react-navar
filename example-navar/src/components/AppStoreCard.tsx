@@ -43,7 +43,7 @@ export const AppStoreCard: React.FC<IProps> = ({
     >
       <ImgWorker
         miniSrc={minSrc}
-        worker={true}
+        worker
         src={src}
         inlist={`pointer-events:none; absolute; overflow:hidden; object-fit:cover; h:100%; w:100%; left; top; z:0;
         ${!full ? 'radius:--radius-xl;' : ''}`}

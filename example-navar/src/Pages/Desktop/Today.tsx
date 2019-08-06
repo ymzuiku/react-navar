@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { AppStoreCard } from "../../components/AppStoreCard";
-import { changeStatusBarDart } from "../../utils/changeStatusBar";
+import { AppStoreCard } from '../../components/AppStoreCard';
+import { changeStatusBarDart } from '../../utils/changeStatusBar';
 
-import { todayData } from "./todayData";
+import { todayData } from './todayData';
 
 interface IProps
   extends React.DetailedHTMLProps<
@@ -12,6 +12,7 @@ interface IProps
   > {}
 
 export const Today: React.FC<IProps> = () => {
+  const [testOne, setTestOne] = React.useState({ ...todayData[2] });
   const handleOnScroll = React.useCallback((e: any) => {
     if (e.target.scrollTop > 160) {
       changeStatusBarDart(false);
@@ -20,9 +21,16 @@ export const Today: React.FC<IProps> = () => {
     }
   }, []);
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      setTestOne({ ...todayData[1] });
+    }, 5000);
+  }, []);
+
   return (
     <div onScroll={handleOnScroll} inlist="overflow:auto; w:100%; h:100vh;">
       <div inlist="h:--23;" />
+      <AppStoreCard {...testOne} />
       {todayData.map((v, i) => {
         return <AppStoreCard key={i} {...v} />;
       })}

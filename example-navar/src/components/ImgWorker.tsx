@@ -41,7 +41,8 @@ export class ImgWorker extends React.Component<
   IImgWorkerProps,
   IImgWorkerState
 > {
-  public image: HTMLImageElement = undefined as any;
+  public div: any = null;
+  public image: HTMLImageElement = new Image();
   public isLoadedSrcLock = false;
   public state = {
     isLoading: true,
@@ -50,6 +51,9 @@ export class ImgWorker extends React.Component<
   public worker: Worker = null as any;
   public constructor(props: IImgWorkerProps) {
     super(props);
+    this.image.style.width = '100%';
+    this.image.style.height = '100%';
+    this.image.style.display = 'none';
 
     // 如果使用 worker 并且浏览器支持 worker
     if (this.props.worker && typeof Worker !== 'undefined') {
@@ -63,22 +67,23 @@ export class ImgWorker extends React.Component<
   }
 
   public componentDidMount() {
-    if (this.props.miniSrc) {
-      if (this.worker) {
-        this.worker.postMessage([this.props.miniSrc, 'miniSrc']);
-      } else {
-        this.loadImage(this.props.miniSrc, 'miniSrc');
-      }
+    this.div.appendChild(this.image);
+    this.postMessage(this.props);
+  }
+
+  public componentWillReceiveProps(nextProps: IImgWorkerProps) {
+    let isPostMessage = false;
+    if (nextProps.miniSrc !== this.props.miniSrc) {
+      isPostMessage = true;
+    }
+    if (nextProps.src !== this.props.src) {
+      isPostMessage = true;
     }
 
-    if (this.props.src) {
-      if (this.worker) {
-        this.worker.postMessage(
-          this.worker.postMessage([this.props.src, 'src'])
-        );
-      } else {
-        this.loadImage(this.props.src, 'miniSrc');
-      }
+    // 如果 src 或 miniSrc 更新，重新请求
+    if (isPostMessage) {
+      this.isLoadedSrcLock = false;
+      this.postMessage(nextProps);
     }
   }
 
@@ -93,47 +98,60 @@ export class ImgWorker extends React.Component<
   }
 
   public loadImage = (url: string, type: string) => {
-    // 如果 src 已经被设置，拦截 miniSrc 的设置
+    // 如果 src 已经被设置，拦截后续的更新
     if (this.isLoadedSrcLock) {
       return;
     }
     if (type === 'src') {
       this.isLoadedSrcLock = true;
-      this.worker.terminate();
-      this.worker = null as any;
     }
 
-    const image = new Image();
-    this.image = image;
-
-    image.src = url;
-    image.decoding = 'async';
-    image.decode !== undefined
-      ? image
+    this.image.src = url;
+    this.image.decoding = 'async';
+    this.image.decode !== undefined
+      ? this.image
           .decode()
           .then(this.onLoad)
           .catch(this.onLoad)
-      : (image.onload = this.onLoad);
+      : (this.image.onload = this.onLoad);
   };
 
   public onLoad = () => {
+    this.image.style.display = 'block';
     this.setState({
       src: this.image.src,
       isLoading: false,
     });
   };
 
+  public postMessage = (props: IImgWorkerProps) => {
+    if (props.miniSrc) {
+      if (this.worker) {
+        this.worker.postMessage([props.miniSrc, 'miniSrc']);
+      } else {
+        this.loadImage(props.miniSrc, 'miniSrc');
+      }
+    }
+
+    if (props.src) {
+      if (this.worker) {
+        this.worker.postMessage(this.worker.postMessage([props.src, 'src']));
+      } else {
+        this.loadImage(props.src, 'miniSrc');
+      }
+    }
+  };
+
   public render() {
     const { boxProps, renderLoading: Loading, src: _src, ...rest } = this.props;
-    const { isLoading, src } = this.state;
+    const { isLoading } = this.state;
 
     return (
-      <>
+      <div ref={r => (this.div = r)} {...rest}>
         {Loading && isLoading && (
           <Loading key="img-worker-loading" isLoaing={isLoading} />
         )}
-        {!isLoading && <img key="img-worker" alt="" src={src} {...rest} />}
-      </>
+      </div>
     );
   }
 }

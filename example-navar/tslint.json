@@ -6,6 +6,7 @@
   },
   "rulesDirectory": [],
   "rules": {
+    "jsx-boolean-value": false,
     "no-empty-interface": false,
     "no-object-literal-type-assertion": false,
     "no-non-null-assertion": false,
@@ -36,6 +37,9 @@
     "arrow-return-shorthand": false,
     "variable-name": false,
     "file-name-casing": [false, "camel-case"],
-    "no-import-side-effect": [false, { "ignore-module": "(\\.html|\\.css|\\.scss|\\.less)$" }]
+    "no-import-side-effect": [
+      false,
+      { "ignore-module": "(\\.html|\\.css|\\.scss|\\.less)$" }
+    ]
   }
 }
